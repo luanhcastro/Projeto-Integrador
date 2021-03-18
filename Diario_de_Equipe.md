@@ -22,10 +22,11 @@ Definimos a primeira Sprint para dia 26/03/2021
 
 ## O que faremos até a próxima reunião (19/03/2021):
 
-Luan: trazer um esboço do modelo relacional do banco de dados.
-Bianca: coletar informações a respeito de cada etapa dentro do sistema, dados de cada CRUD e afins. (esta tarefa está relacionada à tarefa do Luan, ambos trabalharão juntos)
-Vinícius: definir oficialmente todas as Issues, trabalhar para que as necessidades de cada Issue sejam levadas em consideração e prever em qual Sprint podemos alcançar cada uma delas. 
-Guilherme: desenvolver uma identidade de marca e um esboço do Front-End levando em consideração a experiência do usuário. Desenvolvimento da logo, definição de cores da aplicação. 
+- Luan: trazer um esboço do modelo relacional do banco de dados.
+- Bianca: coletar informações a respeito de cada etapa dentro do sistema, dados de cada CRUD e afins. (esta tarefa está relacionada à tarefa do Luan, ambos trabalharão juntos).
+- Vinícius: definir oficialmente todas as Issues, trabalhar para que as necessidades de cada Issue sejam levadas em consideração e prever em qual Sprint podemos alcançar cada uma delas.
+- Guilherme: desenvolver uma identidade de marca e um esboço do Front-End levando em consideração a experiência do usuário. Desenvolvimento da logo, definição de cores da aplicação.
+
 
 Participantes: Bianca, Guilherme, Luan, Vinicius.
 
