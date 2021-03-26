@@ -1,43 +1,70 @@
-# Projeto-Integrador
+
+# 🐶 NannyPet 🐱
 Repositório para desenvolvimento do projeto integrador.
 
-# Descrição do Sistema
+## ✏️ Descrição do Sistema
 
 Uma plataforma onde seja possível encontrar pessoas dispostas tanto a cuidar do seu pet na casa delas, quanto ir até sua casa e o alimentar, fazer passeios e garantir os cuidados necessários. E além de ajudar o dono do pet, esta plataforma gera serviços para pessoas que lidam bem com animais e buscam uma renda extra.
 
-# Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas
 
-JavaScript
-NodeJs
-ReactJs
+- [Javascript](https://www.javascript.com/)
+- [React](https://pt-br.reactjs.org/)
+- [Node](https://nodejs.org/en/)
+- [MySQL](https://www.mysql.com/)
 
-...
+## ⚙️ Rodando a aplicação
 
-# Desenvolvedores
+Inicialmente você precisa ter instalado em sua máquina as seguintes ferramentas:
+- [Git](https://git-scm.com) 
+- [Node](https://nodejs.org/en/)
 
-  Bianca  
-  Luan  
-  Vinicius  
-  Guilherme 
+Com eles instalados, clone este repositório:
+```shell
+$ git clone https://github.com/luanhcastro/Projeto-Integrador.git
+```
+
+Acesse a pasta do projeto:
+```shell
+$ cd Projeto-Integrador
+```
+<br/>
+	
+### 🗄️ Rodando o Backend
+
+Vá para a pasta backend e instale as dependências:
+```shell
+$ cd backend
+$ npm install
+```
+
+Execute o Backend: 
+```shell
+$ npm start
+```
+O servidor irá iniciar na porta:3000 - Acesse <http://localhost:3000/>
+
+<br/>
+
+### 🖥️ Rodando o Frontend
+
+Vá para a pasta frontend e instale as dependências:
+```shell
+$ cd frontend
+$ npm install
+```
+
+Execute o Frontend: 
+```shell
+$ npm start
+```
+A aplicação irá iniciar automaticamente na porta:3000
+
+## 💻 Desenvolvedores
+
+-  Bianca  
+-  Luan  
+-  Vinicius  
+-  Guilherme 
 
 # 
-
-
-Problema: Hoje em dia é muito comum as pessoas terem algum bicho de estimação, um problema recorrente enfrentado é na hora de fazer alguma viagem ou precisar passar um tempo fora de casa. Animais domésticos demandam certos cuidados e não podem ficar muito tempo sozinhos.
-
-Solução: Uma plataforma onde seja possível encontrar pessoas dispostas tanto a cuidar do seu pet na casa delas, quanto ir até sua casa e o alimentar, fazer passeios e garantir os cuidados necessários. E além de ajudar o dono do pet, esta plataforma gera serviços para pessoas que lidam bem com animais e buscam uma renda extra.
-
-Como funcionaria? Uma pessoa que se considera apta a cuidar de um animal se cadastra no sistema web com serviço de hospedagem(receber um animal em sua própria residência), pet sitter(cuidar do animal na residência do dono), ou os dois. Insere suas datas disponíveis e o valor cobrado por diária de serviço.
-
-O dono do pet seleciona através de uma interface web a data desejada e busca uma pessoa disponível para o serviço de hospedagem ou pet sitter.
-
-O cadastro do cuidador a princípio deverá possuir seu nome, idade, sexo, endereço, cpf, email, telefone, uma lista com os tipos de animais que ele cuida.
-
-O cadastro do cliente deverá possuir seu nome, idade, sexo, endereco, cpf, email, telefone e seus pets.
-
-O cadastro do pet deverá ser feito a partir de um cliente já cadastrado, com o nome do pet, raça, porte e cuidados especiais.
-
-Cada perfil dos pet sitter terá: um número de avaliações, quantos serviços ele já realizou, descrição sobre a pet sitter, localização, preço do serviço, comentários de clientes, imagens do ambiente(opcional),
-
-Cada perfil dos donos terá: um número de avaliações, quantos serviços ele já solicitou, descrição sobre o dono.
-
