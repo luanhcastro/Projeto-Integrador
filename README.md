@@ -62,9 +62,9 @@ A aplicação irá iniciar automaticamente na porta:3000
 
 ## 💻 Desenvolvedores
 
--  Bianca  
--  Luan  
--  Vinicius  
--  Guilherme 
+-  [Bianca Miazaki](https://github.com/bmiazaki)
+-  [Guilherme Zago](https://github.com/GuilhermeZCanesin)
+-  [Luan Castro](https://github.com/luanhcastro)
+-  [Vinicius Kuwakino](https://github.com/viniciuskuwakino)
 
 # 
