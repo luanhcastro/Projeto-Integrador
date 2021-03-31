@@ -43,3 +43,19 @@ Hoje na reunião discutimos sobre o Modelo Relacional que o Luan fez, e cada um 
 - Guilherme: terminar de criar a template do frontend
 
 Participantes: Bianca, Guilherme, Luan, Vinicius.
+
+## Reunião 5
+
+# Data: 30/03/2021
+
+Hoje na reunião discutimos sobre a finalização da primeira sprint, contendo o formulario para o CRUD de usuario e de pets
+
+## O que faremos até a próxima reunião:
+
+- Luan: finalizar o SQL junto com a Bianca, auxiliar no frontend
+- Bianca: finalizar o SQL junto com o Luan, auxiliar no backend
+- Vinicius: montar o CRUD de usuario e pets, da parte do backend
+- Guilherme: criar os formulários de usuario e pets, da parte do frontend
+
+Participantes: Bianca, Guilherme, Luan, Vinicius.
+
