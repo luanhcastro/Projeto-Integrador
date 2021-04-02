@@ -9,7 +9,7 @@ import PetCrud from '../components/user/PetCRUD'
 export default props =>
    <Switch>
       <Route exact path='/' component={Home} />
-      <Route path='/users' component={UserCrud} />
-      <Route path='/pets' component={PetCrud} />
+      <Route path='/dono' component={UserCrud} />
+      <Route path='/pet' component={PetCrud} />
       <Redirect from='*' to='/' />
    </Switch>

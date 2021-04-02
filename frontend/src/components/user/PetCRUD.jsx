@@ -16,11 +16,13 @@ const headerProps = {
    subtitle: 'Cadastro de Pets'
 }
 
-const baseUrl = 'http://localhost:3001/pets'
+const baseUrl = 'http://localhost:3001/pet'
 const initialState = {
    pets: {
       userId: '',
       petName: '',
+      porte: '',
+      raca: '',
       age: '',
       type: '',
       description: '',
@@ -63,7 +65,7 @@ export default class PetsCrud extends Component {
       return (
          <div className="from">
             <div className="row pt-3">
-               <div className="col-12 col-md-8 ml-3">
+               <div className="col-12 col-md-3 ml-3">
                   <TextField
                      id="outlined-multiline-static"
                      label="Nome"
@@ -77,6 +79,44 @@ export default class PetsCrud extends Component {
                      defaultValue="Default Value"
                      variant="outlined"
                      placeholder="Digite o nome do seu bichinho..."
+                  />
+               </div>
+               <div className="col-12 col-md-3 ">
+                  <div className="form-group">
+                     <FormControl style={{ width: '100%' }}>
+                        <InputLabel>Porte do animal</InputLabel>
+                        <NativeSelect
+                           value={this.state.pets.porte}
+                           onChange={e => this.updateField(e)}
+                           inputProps={{
+                              name: 'porte',
+                              id: 'age-native-helper',
+                           }}
+                        >
+                           <option aria-label="None" value="" />
+                           <option value="Pequeno">Pequeno</option>d
+                           <option value="Médio">Médio</option>
+                           <option value="Grande">Grande</option>
+                        </NativeSelect>
+                        <FormHelperText>Selecione qual é o porte do seu bichinho</FormHelperText>
+                     </FormControl>
+                  </div>
+
+               </div>
+               <div className="col-12 col-md-3">
+                  <TextField
+                     id="outlined-multiline-static"
+                     label="Raça"
+                     name="raca"
+                     value={this.state.pets.raca}
+                     onChange={e => this.updateField(e)}
+                     multiline
+                     fullWidth
+                     rows={1}
+                     rowsMax={1}
+                     defaultValue="Default Value"
+                     variant="outlined"
+                     placeholder="Qual a raça do seu bichinho..."
                   />
                </div>
             </div>
@@ -102,6 +142,7 @@ export default class PetsCrud extends Component {
                         <FormHelperText>Selecione qual é o seu bichinho</FormHelperText>
                      </FormControl>
                   </div>
+
                </div>
 
                <div className="col-12 col-md-3">
@@ -144,7 +185,7 @@ export default class PetsCrud extends Component {
                   </div>
                </div>
 
-               <div className="col-12 col-md-2">
+               <div className="col-12 col-md-3">
                   <div className="form-group">
                      <FormControl style={{ width: '100%' }}>
                         <InputLabel>É castrado ?</InputLabel>
@@ -166,7 +207,7 @@ export default class PetsCrud extends Component {
 
             </div>
             <div className="row pt-3">
-               <div className="col-12 col-md-8 ml-3">
+               <div className="col-12 col-md-9 ml-3">
                   <div className="form-group">
                      <TextField
                         id="outlined-multiline-static"
@@ -180,7 +221,7 @@ export default class PetsCrud extends Component {
                         defaultValue="Default Value"
                         variant="outlined"
                         placeholder="Nos conte aqui um pouco mais sobre seu querido amigo..."
-                     /> 
+                     />
                   </div>
                </div>
             </div>

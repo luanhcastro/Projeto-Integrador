@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,  } from 'react';
 import axios from 'axios'
 import Main from '../template/Main';
 import TextField from '@material-ui/core/TextField';
@@ -11,11 +11,11 @@ const headerProps = {
    subtitle: 'Cadastro de Usuários'
 }
 
-const baseUrl = 'http://localhost:3001/users'
+const baseUrl = 'http://localhost:3001/dono'
 const initialState = {
    user: {
       name: '',
-      lastName: '',
+      idade: '',
       email: '',
       phone: '',
       CPF: '',
@@ -79,18 +79,13 @@ export default class UsersCrud extends Component {
                <div className="col-8 col-md-4">
                   <div className="form-group">
                      <TextField
-                        id="outlined-multiline-static"
-                        label="Sobrenome"
-                        name="lastName"
-                        value={this.state.user.lastName}
-                        onChange={e => this.updateField(e)}
-                        multiline
-                        fullWidth
-                        rows={1}
-                        rowsMax={1}
-                        defaultValue="Default Value"
-                        variant="outlined"
-                        placeholder="Digite seu sobrenome"
+                        id="date"
+                        label="Data de nascimento"
+                        type="date"
+                        defaultValue="2002-01-01"
+                        InputLabelProps={{
+                           shrink: true,
+                        }}
                      />
                   </div>
                </div>
