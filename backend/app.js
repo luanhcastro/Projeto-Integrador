@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const app = express()
 
 const RotaCuidador = require('./routes/cuidador')
+const RotaDono = require('./routes/dono')
 
 app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: true }))     // aceita apenas dados simples
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 
 
 app.use('/cuidador', RotaCuidador)
+app.use('/dono', RotaDono)
 
 
 //Quando nao encontra rota
