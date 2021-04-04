@@ -10,7 +10,6 @@ CREATE TABLE dono (
     cpf VARCHAR(12),
     endereco VARCHAR(50),
     qtdPets INT,
-    avaliacoes VARCHAR(100),
     telefone VARCHAR(12),
     PRIMARY KEY (id)
 );
@@ -33,9 +32,14 @@ CREATE TABLE cuidador (
     cpf VARCHAR(12),
     endereco VARCHAR(50),
     numServicos INT,
-    avaliacoes VARCHAR(100),
     telefone VARCHAR(12),
     PRIMARY KEY (id)  
+);
+
+CREATE TABLE avaliacaoCuidador(
+	valor INT,
+    idCuidador INT,
+    FOREIGN KEY (idCuidador) REFERENCES cuidador(id)
 );
 
 CREATE TABLE servico (
