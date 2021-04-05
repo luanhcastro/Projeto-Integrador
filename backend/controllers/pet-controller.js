@@ -4,35 +4,52 @@ exports.postPet = (req, res) => {
     mysql.getConnection((error, connection) => {
         if (error) return res.status(500).send({ error: error })
         connection.query(
-            `INSERT INTO pet
-            (nomePet, raca, porte, idade) VALUES
-            (?, ?, ?, ?)`, [
-                req.body.nome,
-                req.body.raca,
-                req.body.porte,
-                req.body.idade
-            ],
+            `SELECT *
+            FROM dono
+            WHERE id = ?`,
+            [req.body.id_dono],
             (error, result) => {
-                connection.release()
                 if (error) return res.status(500).send({ error: error })
 
-                // const idDono = donoCriado.id_dono,
-                const response = {
-                    mensagem: 'Cadastro do Pet realizado com sucesso!',
-                    petCriado: {
-                        id: result.id,
-                        nome: req.body.nome,
-                        raca: req.body.raca,
-                        porte: req.body.porte,
-                        idade: req.body.idade
-                            //id_dono: idDono
-                    }
+                if (result.length == 0) {
+                    return res.status(404).send({
+                        mensagem: 'Id do Dono nao encontrado'
+                    })
                 }
-                return res.status(201).send(response)
+                connection.query(
+                    `INSERT INTO pet
+                    (nomePet, raca, porte, idade, idDono) VALUES
+                    (?, ?, ?, ?, ?)`, [
+                        req.body.nome,
+                        req.body.raca,
+                        req.body.porte,
+                        req.body.idade,
+                        req.body.id_dono
+                    ],
+                    (error, result) => {
+                        connection.release()
+                        if (error) return res.status(500).send({ error: error })
+                
+                        const response = {
+                            mensagem: 'Cadastro do Pet realizado com sucesso!',
+                            petCriado: {
+                                id: result.id,
+                                nome: req.body.nome,
+                                raca: req.body.raca,
+                                porte: req.body.porte,
+                                idade: req.body.idade,
+                                id_dono: req.body.id_dono
+                            }
+                        }
+                        return res.status(201).send(response)
+                    }
+                )
             }
         )
     })
 }
+
+
 
 exports.getPet = (req, res) => {
     mysql.getConnection((error, connection) => {
