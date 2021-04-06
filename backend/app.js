@@ -7,6 +7,7 @@ const RotaCuidador = require('./routes/cuidador')
 const RotaDono = require('./routes/dono')
 const RotaPet = require('./routes/pet')
 const RotaServico = require('./routes/servico')
+const RotaAvaliacao = require('./routes/avaliacao')
 
 app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: true })) // aceita apenas dados simples
@@ -32,6 +33,7 @@ app.use('/cuidador', RotaCuidador)
 app.use('/dono', RotaDono)
 app.use('/pet', RotaPet)
 app.use('/servico', RotaServico)
+app.use('/avaliacao', RotaAvaliacao)
 
 
 //Quando nao encontra rota
