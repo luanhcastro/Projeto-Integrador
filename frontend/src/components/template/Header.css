@@ -1,12 +1,66 @@
 header.header {
    background-color: lightgray;
-   padding: 0px 15px;
-   overflow: hidden;
    white-space: nowrap;
    box-shadow:var(--shadow);
    justify-content: center;
+   align-items: center;
+}
+header.header h1 {
+   width: 1%;
+   height: 100px;
+   align-self: center;
+   font-size: 1.8em;
+}
+header.header h2 {
+   align-self: center;
+   width: 10%;
+   height: 100px;
+}
+header.header h3 {
+   height: 100px;
+   align-self: center;
+   width: 80%;
+   height: 100px;
+}
+h1.logo {
+   width: 100px;
+   height: 130px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 5px 5px 5px 5px;
+ 
+}
+img {
+   height: 100%;
+   width: 100%;
 }
 
-header.header h1 {
-   font-size: 1.8em;
+h3.end {
+   height: 100%;
+   width: 100%;
+   justify-content: center;
+   align-items: center;
+   display: flex;
+}
+h2.mid {
+   height: 100%;
+   width: 100%;
+   justify-content: center;
+   align-items: center;
+   display: flex;
+}
+
+
+navbutton {
+   display: block;
+   text-decoration: none;
+   color: #FFF;
+   font-weight: 300;
+   padding: 15px;
+
+}
+
+navbutton:hover {
+   background: linear-gradient(135deg, #1b2c57, #32dac3 100%);
 }

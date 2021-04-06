@@ -1,0 +1,30 @@
+header.header {
+   background-color: lightgray;
+   overflow: hidden;
+   white-space: nowrap;
+   box-shadow:var(--shadow);
+   justify-content: center;
+   align-items: center;
+}
+
+header.header h1 {
+   width: 45%;
+   font-size: 1.8em;
+}
+
+
+h2.logo {
+   width: 10%;
+   height: 130px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 5px 5px 5px 5px;
+ 
+}
+img {
+   width: 100%;
+   height: 100%;
+}
+
+

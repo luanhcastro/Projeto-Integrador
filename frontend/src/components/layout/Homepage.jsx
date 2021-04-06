@@ -1,7 +1,8 @@
 import React from 'react'
-import "./Home.css"
-import Main from '../template/Main'
+import { Link } from 'react-router-dom'
 import SimpleImageSlider from "react-simple-image-slider";
+
+import Header from '../template/Header'
 
 const images = [
    { url: "https://www.cesarsway.com/wp-content/uploads/2015/06/6-tips-for-mastering-the-dog-walk.jpg" },
@@ -13,10 +14,27 @@ const images = [
 ];
 
 export default props =>
-   <Main icon="home" title="Início" subtitle="Seja bem vindo ao Nanny Pet!">
-      <div className={"displayslide"} >
+   <div className="homepage">
+      <Header
+         link1={
+         <Link to="/usuario">
+            <navbutton className="fa">USUÁRIO</navbutton>
+         </Link>
+      }
+         link2={
+         <Link to="/cuidador">
+            <navbutton className="fa">CUIDADOR</navbutton>
+         </Link>
+      }
+         link3={
+         <Link to="/login">
+            <navbutton className="fa">LOGIN</navbutton>
+         </Link>
+      }     
+      />
+         <div className={"displayslide"} >
             <SimpleImageSlider
-               width={'90%'}
+               width={'100%'}
                height={400}
                images={images}
                slideDuration={0.5}
@@ -24,29 +42,10 @@ export default props =>
                showNavs
                useGPUrender
             />
-      </div>
-      <div className="display-4">Bem Vindo !</div>
-      <hr />
-      <p className="mb-0">Bla  bla</p>
-      <div className="display-4">Bem Vindo !</div>
-      <hr />
-      <p className="mb-0">Bla  bla</p>
-      <div className="display-4">Bem Vindo !</div>
-      <hr />
-      <p className="mb-0">Bla  bla</p>
-      <div className="display-4">Bem Vindo !</div>
-      <hr />
-      <p className="mb-0">Bla  bla</p>
-      <div className="display-4">Bem Vindo !</div>
-      <hr />
-      <p className="mb-0">Bla  bla</p>
-      <div className="display-4">Bem Vindo !</div>
-      <hr />
-      <p className="mb-0">Bla  bla</p>
-      <div className="display-4">Bem Vindo !</div>
-      <hr />
-      <p className="mb-0">Bla  bla</p>
-      <div className="display-4">Bem Vindo !</div>
-      <hr />
-      <p className="mb-0">Bla  bla</p>
-   </Main>
+         </div>
+         <div className="display-4">A SER PRODUZIDO</div>
+         <hr />
+         <p className="mb-0">COISAS QUE A APLICAÇÃO PODE OFERECER</p>
+         <div className="display-4">EXPERIENCIAS DOS USUÁRIOS</div>
+         
+   </div>
