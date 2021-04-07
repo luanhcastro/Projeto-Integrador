@@ -5,15 +5,14 @@ exports.postCuidador = (req, res) => {
         if (error) return res.status(500).send({error: error})
         connection.query(
             `INSERT INTO cuidador
-            (nome, idade, cpf, endereco, numServicos, avaliacoes, telefone) VALUES
-            (?,?,?,?,?,?,?)`,
+            (nome, idade, cpf, endereco, numServicos, telefone) VALUES
+            (?,?,?,?,?,?)`,
             [
                 req.body.nome,
                 req.body.idade,
                 req.body.cpf,
                 req.body.endereco,
                 req.body.numServicos,
-                req.body.avaliacoes,
                 req.body.telefone
             ],
             (error, result) => {
@@ -29,7 +28,6 @@ exports.postCuidador = (req, res) => {
                         cpf: req.body.cpf,
                         endereco: req.body.endereco,
                         numServicos: req.body.numServicos,
-                        avaliacoes: req.body.avaliacoes,
                         telefone: req.body.telefone
                     }
                 }
@@ -60,7 +58,6 @@ exports.getCuidador = (req, res) => {
                             cpf: cuidador.cpf,
                             endereco: cuidador.endereco,
                             numServicos: cuidador.numServicos,
-                            avaliacoes: cuidador.avaliacoes,
                             telefone: cuidador.telefone
                         }
                     })
@@ -98,7 +95,6 @@ exports.getCuidadorById = (req, res) => {
                         cpf: result[0].cpf,
                         endereco: result[0].endereco,
                         numServicos: result[0].numServicos,
-                        avaliacoes: result[0].avaliacoes,
                         telefone: result[0].telefone
                     }
                 }
@@ -120,7 +116,6 @@ exports.updateCuidador = (req, res) => {
                     cpf = ?, 
                     endereco = ?, 
                     numServicos = ?, 
-                    avaliacoes = ?, 
                     telefone = ?
                 WHERE id = ?`,
             [
@@ -129,7 +124,6 @@ exports.updateCuidador = (req, res) => {
                 req.body.cpf,
                 req.body.endereco,
                 req.body.numServicos,
-                req.body.avaliacoes,
                 req.body.telefone,
                 req.body.id
             ],
@@ -145,7 +139,6 @@ exports.updateCuidador = (req, res) => {
                         cpf: req.body.cpf,
                         endereco: req.body.endereco,
                         numServicos: req.body.numServicos,
-                        avaliacoes: req.body.avaliacoes,
                         telefone: req.body.telefone
                     }
                 }
