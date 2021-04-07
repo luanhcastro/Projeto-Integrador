@@ -5,15 +5,14 @@ exports.postDono = (req, res) => {
         if (error) return res.status(500).send({error: error})
         connection.query(
             `INSERT INTO dono
-            (nome, idade, cpf, endereco, qtdPets, avaliacoes, telefone) VALUES
-            (?,?,?,?,?,?,?)`,
+            (nome, idade, cpf, endereco, qtdPets, telefone) VALUES
+            (?,?,?,?,?,?)`,
             [
                 req.body.nome,
                 req.body.idade,
                 req.body.cpf,
                 req.body.endereco,
                 req.body.qtdPets,
-                req.body.avaliacoes,
                 req.body.telefone
             ],
             (error, result) => {
@@ -29,7 +28,6 @@ exports.postDono = (req, res) => {
                         cpf: req.body.cpf,
                         endereco: req.body.endereco,
                         qtdPets: req.body.qtdPets,
-                        avaliacoes: req.body.avaliacoes,
                         telefone: req.body.telefone
                     }
                 }
@@ -60,7 +58,6 @@ exports.getDono = (req, res) => {
                             cpf: dono.cpf,
                             endereco: dono.endereco,
                             qtdPets: dono.qtdPets,
-                            avaliacoes: dono.avaliacoes,
                             telefone: dono.telefone
                         }
                     })
@@ -98,7 +95,6 @@ exports.getDonoById = (req, res) => {
                         cpf: result[0].cpf,
                         endereco: result[0].endereco,
                         qtdPets: result[0].qtdPets,
-                        avaliacoes: result[0].avaliacoes,
                         telefone: result[0].telefone
                     }
                 }
@@ -120,7 +116,6 @@ exports.updateDono = (req, res) => {
                     cpf = ?, 
                     endereco = ?, 
                     qtdPets = ?, 
-                    avaliacoes = ?, 
                     telefone = ?
                 WHERE id = ?`,
             [
@@ -129,7 +124,6 @@ exports.updateDono = (req, res) => {
                 req.body.cpf,
                 req.body.endereco,
                 req.body.qtdPets,
-                req.body.avaliacoes,
                 req.body.telefone,
                 req.body.id
             ],
@@ -145,7 +139,6 @@ exports.updateDono = (req, res) => {
                         cpf: req.body.cpf,
                         endereco: req.body.endereco,
                         qtdPets: req.body.qtdPets,
-                        avaliacoes: req.body.avaliacoes,
                         telefone: req.body.telefone
                     }
                 }
