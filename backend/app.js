@@ -1,8 +1,9 @@
 const express = require('express')
 const morgan = require('morgan')
-
+const cors = require('cors')
 const app = express()
 
+app.use(cors())
 const RotaCuidador = require('./routes/cuidador')
 const RotaDono = require('./routes/dono')
 const RotaPet = require('./routes/pet')
