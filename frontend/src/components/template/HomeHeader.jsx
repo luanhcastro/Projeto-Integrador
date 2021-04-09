@@ -14,10 +14,10 @@ export default props =>
       </Link>  
   <div theme="light" mode="horizontal" class="buttons" style={{  }}defaultSelectedKeys={['2']}>
       <Link to="/usuario">
-         <Button type="primary" shape="round" style={{margin: 10}} icon={(<UserOutlined style={{fontSize:20}}/>)}>USUÁRIO</Button>
+         <Button type="primary" size="large" style={{margin: 10}} icon={(<UserOutlined style={{fontSize:20}}/>)}>USUÁRIO</Button>
       </Link>
       <Link to="/cuidador">
-         <Button type="primary" shape="round" style={{margin: 10}} icon={(<HeartOutlined style={{fontSize:20}}/>)}>CUIDADOR</Button>
+         <Button type="primary" size="large" style={{margin: 10}} icon={(<HeartOutlined style={{fontSize:20}}/>)}>CUIDADOR</Button>
       </Link>
       
   </div>

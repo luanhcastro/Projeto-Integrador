@@ -14,7 +14,7 @@ export default props =>
       </Link>  
   <div theme="light" mode="horizontal" class="buttons">
       <Link to="/">
-         <Button type="primary" style={{margin: 10}} shape="round" icon={(<ArrowLeftOutlined style={{fontSize:20}}/>)}>VOLTAR</Button>
+         <Button type="primary" size="large" style={{margin: 10}} icon={(<ArrowLeftOutlined style={{fontSize:20}}/>)}>VOLTAR</Button>
       </Link>
   </div>
 </Header>
