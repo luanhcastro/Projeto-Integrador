@@ -71,7 +71,7 @@ Hoje na reunião discutimos sobre a segunda sprint, e organizamos as tarefas de 
 - Bianca: Iniciou estudos de como utilizar o Sequelize ORM.
 - Vinicius: Iniciou estudos de como utilizar o Sequelize ORM.
 - Guilherme: Procurou por novas ideias das telas do frontend.
-- 
+ 
 ## O que faremos até a próxima reunião:
 
 - Luan: Realizar ajustes nas telas do frontend.
@@ -93,7 +93,7 @@ Hoje na reunião discutimos sobre a segunda sprint, e resolvemos aplicar algumas
 - Bianca: Ainda estudando Sequelize e também aplicando no projeto.
 - Vinicius: Ainda estudando Sequelize e também aplicando no projeto.
 - Guilherme: Apresentou ideias de telas do frontend, na parte de donos de animais.
-- 
+
 ## O que faremos até a próxima reunião:
 
 - Luan: Terminar as telas do frontend de cuidadores.
