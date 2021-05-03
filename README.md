@@ -38,6 +38,8 @@ $ cd backend
 $ npm install
 ```
 
+Na pasta "config/database.js", configure informando o dialect, host, username, password, e o nome do database.
+
 Execute o Backend: 
 ```shell
 $ npm start
