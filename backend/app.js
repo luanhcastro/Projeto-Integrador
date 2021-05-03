@@ -1,14 +1,17 @@
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
+
+require('./src/database')
+
 const app = express()
 
 app.use(cors())
-const RotaCuidador = require('./routes/cuidador')
-const RotaDono = require('./routes/dono')
-const RotaPet = require('./routes/pet')
-const RotaServico = require('./routes/servico')
-const RotaAvaliacao = require('./routes/avaliacao')
+const RotaCuidador = require('./src/routes/cuidador')
+const RotaDono = require('./src/routes/dono')
+const RotaAvaliacao = require('./src/routes/avaliacao')
+const RotaPet = require('./src/routes/pet')
+const RotaServico = require('./src/routes/servico')
 
 app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: true })) // aceita apenas dados simples
@@ -32,9 +35,9 @@ app.use((req, res, next) => {
 
 app.use('/cuidador', RotaCuidador)
 app.use('/dono', RotaDono)
+app.use('/avaliacao', RotaAvaliacao)
 app.use('/pet', RotaPet)
 app.use('/servico', RotaServico)
-app.use('/avaliacao', RotaAvaliacao)
 
 
 //Quando nao encontra rota
