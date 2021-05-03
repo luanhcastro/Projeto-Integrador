@@ -3,14 +3,15 @@ DROP TABLE IF EXISTS avaliacaoCuidador;
 DROP TABLE IF EXISTS cuidador;
 DROP TABLE IF EXISTS pet;
 DROP TABLE IF EXISTS dono;
+DROP TABLE IF EXISTS sequelizemeta;
 
 CREATE TABLE dono (
 	id INT AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
-    idade INT,
+    dataNascimento DATE NOT NULL,
     cpf VARCHAR(12) UNIQUE NOT NULL,
-    endereco VARCHAR(50),
-    qtdPets INT,
+    endereco VARCHAR(50) NOT NULL,
+    qtdPetsdono INT,
     telefone VARCHAR(12) UNIQUE NOT NULL,
     PRIMARY KEY (id)
 );
@@ -29,9 +30,9 @@ CREATE TABLE pet (
 CREATE TABLE cuidador (
 	id INT AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
-    idade INT,
+    dataNascimento DATE NOT NULL,
     cpf VARCHAR(12) UNIQUE NOT NULL,
-    endereco VARCHAR(50),
+    endereco VARCHAR(50)NOT NULL,
     numServicos INT,
     telefone VARCHAR(12) UNIQUE NOT NULL,
     PRIMARY KEY (id)  
