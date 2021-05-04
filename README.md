@@ -44,7 +44,7 @@ Execute o Backend:
 ```shell
 $ npm start
 ```
-O servidor irá iniciar na porta:3000 - Acesse <http://localhost:3000/>
+O servidor irá iniciar na porta:3001 -
 
 <br/>
 
@@ -60,7 +60,7 @@ Execute o Frontend:
 ```shell
 $ npm start
 ```
-A aplicação irá iniciar automaticamente na porta:3000
+A aplicação irá iniciar automaticamente na porta:3000 - Acesse <http://localhost:3000/>
 
 ## 💻 Desenvolvedores
 
