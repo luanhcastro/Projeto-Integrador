@@ -44,7 +44,7 @@ Execute o Backend:
 ```shell
 $ npm start
 ```
-O servidor irá iniciar na porta:3001 -
+O servidor irá iniciar na porta:3001
 
 <br/>
 
