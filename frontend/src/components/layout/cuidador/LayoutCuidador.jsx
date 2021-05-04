@@ -18,7 +18,7 @@ const { Content, Footer } = Layout;
          await axios.post(url, 
          {
             nome: values.nome,
-            idade: values.idade,
+            dataNascimento:values.dataNasc,
             cpf: values.cpf,
             endereco: values.endereco,
             numServicos: 0,
@@ -79,7 +79,7 @@ const { Content, Footer } = Layout;
                 ]}
               >
                 <Input
-                maxLength={8}
+                maxLength={11}
                 placeholder="Insira sua data de Nascimento" />
               </Form.Item>
             </Col>
