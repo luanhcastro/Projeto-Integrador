@@ -102,3 +102,23 @@ Hoje na reunião discutimos sobre a segunda sprint, e resolvemos aplicar algumas
 - Guilherme: Terminar as telas do frontend de animais.
 
 Participantes: Bianca, Guilherme, Luan, Vinicius.
+
+## Reunião 8
+
+# Data: 11/05/2021
+
+Hoje na reunião discutimos sobre a terceira sprint, e dividimos as histórias faltantes entre todos os membros do grupo.
+
+## O que fizemos até ontem:
+
+- Iniciamos o processo para a realização da Terceira Sprint.
+
+## O que faremos até a próxima reunião:
+
+- Luan e Guilherme: Finalizar os itens faltantes da segunda sprint para o front-end, e dividir as histórías a eles determinadas, em sub-issues.
+- Bianca e Vinicius: Implementar itens faltantes do back-end, e dividir a históría a ele(a) determinada em sub-issues.
+
+## Proxima reunião agendada para Sábado, dia: 15/05/2021
+
+Participantes: Bianca, Guilherme, Luan, Vinicius.
+
