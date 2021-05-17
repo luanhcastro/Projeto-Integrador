@@ -6,14 +6,23 @@ module.exports = {
   async postCuidador(req, res) {
     const {
       nome,
+      senha,
       dataNascimento,
       cpf,
       endereco,
       numServicos,
       telefone,
     } = req.body
+
+    const verificacaoCpf = await Cuidador.findOne({ where: { cpf: cpf } })
+    const verificacaoTelefone = await Cuidador.findOne({ where: { telefone: telefone } })
+
+    if (verificacaoCpf) return res.status(400).send({ error: "Cpf ja existe" })
+    if (verificacaoTelefone) res.status(400).send({ error: "Telefone ja existe" })
+
     const cuidador = await Cuidador.create({
       nome,
+      senha,
       dataNascimento,
       cpf,
       endereco,
@@ -46,16 +55,17 @@ module.exports = {
     const {
       id,
       nome,
+      senha,
       dataNascimento,
-      cpf,
       endereco,
       numServicos,
       telefone,
     } = req.body
+
     const cuidador = await Cuidador.update({
       nome,
+      senha,
       dataNascimento,
-      cpf,
       endereco,
       numServicos,
       telefone,
