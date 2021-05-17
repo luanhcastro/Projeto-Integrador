@@ -4,6 +4,7 @@ class Dono extends Model {
   static init(sequelize) {
     super.init({
       nome: DataTypes.STRING,
+      senha: DataTypes.STRING,
       dataNascimento: DataTypes.DATE,
       cpf: DataTypes.STRING,
       endereco: DataTypes.STRING,

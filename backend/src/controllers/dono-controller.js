@@ -6,13 +6,22 @@ module.exports = {
   async postDono(req, res) {
     const {
       nome,
+      senha,
       dataNascimento,
       cpf,
       endereco,
       telefone,
     } = req.body
+
+    const verificacaoCpf = await Dono.findOne({ where: { cpf: cpf } })
+    const verificacaoTelefone = await Dono.findOne({ where: { telefone: telefone } })
+
+    if (verificacaoCpf) return res.status(400).send({ error: "Cpf ja existe" })
+    if (verificacaoTelefone) res.status(400).send({ error: "Telefone ja existe" })
+
     const dono = await Dono.create({
       nome,
+      senha,
       dataNascimento,
       cpf,
       endereco,
@@ -44,15 +53,16 @@ module.exports = {
     const {
       id,
       nome,
+      senha,
       dataNascimento,
-      cpf,
       endereco,
       telefone,
     } = req.body
+
     const dono = await Dono.update({
       nome,
+      senha,
       dataNascimento,
-      cpf,
       endereco,
       telefone,
     }, {
