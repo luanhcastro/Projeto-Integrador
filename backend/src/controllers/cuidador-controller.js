@@ -1,4 +1,6 @@
 const Cuidador = require('../models/cuidador')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 module.exports = {
 
@@ -7,6 +9,7 @@ module.exports = {
     const {
       nome,
       senha,
+      email,
       dataNascimento,
       cpf,
       endereco,
@@ -15,14 +18,17 @@ module.exports = {
     } = req.body
 
     const verificacaoCpf = await Cuidador.findOne({ where: { cpf: cpf } })
+    const verificacaoEmail = await Cuidador.findOne({ where: { email: email } })
     const verificacaoTelefone = await Cuidador.findOne({ where: { telefone: telefone } })
 
     if (verificacaoCpf) return res.status(400).send({ error: "Cpf ja existe" })
-    if (verificacaoTelefone) res.status(400).send({ error: "Telefone ja existe" })
+    if (verificacaoEmail) return res.status(400).send({ error: "Email ja existe" })
+    if (verificacaoTelefone) return res.status(400).send({ error: "Telefone ja existe" })
 
     const cuidador = await Cuidador.create({
       nome,
       senha,
+      email,
       dataNascimento,
       cpf,
       endereco,
@@ -56,15 +62,34 @@ module.exports = {
       id,
       nome,
       senha,
+      email,
       dataNascimento,
       endereco,
       numServicos,
       telefone,
     } = req.body
 
+    const verificacaoEmail = await Cuidador.findOne({ 
+      where: { 
+        email: email,
+        id: { [Op.ne]: id } // id != id
+      }
+    })
+    
+    const verificacaoTelefone = await Cuidador.findOne({ 
+      where: { 
+        telefone: telefone,
+        id: { [Op.ne]: id } // id != id
+      } 
+    })
+
+    if (verificacaoEmail) return res.status(400).send({ error: "Email ja existe" })
+    if (verificacaoTelefone) return res.status(400).send({ error: "Telefone ja existe" })
+
     const cuidador = await Cuidador.update({
       nome,
       senha,
+      email,
       dataNascimento,
       endereco,
       numServicos,

@@ -5,6 +5,7 @@ class Cuidador extends Model {
     super.init({
       nome: DataTypes.STRING,
       senha: DataTypes.STRING,
+      email: DataTypes.STRING,
       dataNascimento: DataTypes.DATE,
       cpf: DataTypes.STRING,
       endereco: DataTypes.STRING,
