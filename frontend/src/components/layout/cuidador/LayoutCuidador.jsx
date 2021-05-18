@@ -155,7 +155,6 @@ const { Content, Footer } = Layout;
                 ]}
               >
                 <Input
-                maxLength={50}
                 placeholder="Insira seu email" 
                 />
               </Form.Item>
@@ -172,8 +171,7 @@ const { Content, Footer } = Layout;
                 ]}
               >
                 <Input
-                maxLength={10}
-                placeholder="Insira uma senha de até 10 caractéres" 
+                placeholder="Insira uma senha" 
                 />
               </Form.Item>
             </Col>
