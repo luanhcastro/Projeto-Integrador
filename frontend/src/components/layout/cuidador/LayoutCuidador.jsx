@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Header from '../../template/UserHeader'
 import "../Home.css"
-import { Layout, Card, Typography, Form, Input, InputNumber, Button, Row, Col, Alert } from 'antd';
+import { Layout, Card, Typography, Form, Input, notification, Button, Row, Col, Alert } from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
 const { Title } = Typography;
@@ -12,28 +12,39 @@ const { Content, Footer } = Layout;
       const [showAlert, setShowAlert] = useState(false);
       const [showErrorAlert, setShowErrorAlert] = useState(false);
       const url = 'http://localhost:3001/cuidador'
-      const onFinish = async (values) => {
+      const onFinish = (values) => {
          console.log('Received values of form: ', values);
-         try{
-         await axios.post(url, 
+         axios.post(url, 
          {
             nome: values.nome,
             dataNascimento:values.dataNasc,
             cpf: values.cpf,
             endereco: values.endereco,
             numServicos: 0,
+            email: values.email,
+            senha: values.senha,
             telefone: values.telefone,
           })
-         .then(({ response }) => {
-            setShowAlert(true);
+         .then((response) => {
+          notification['success']({
+            message: 'Cadastrado com sucesso',
+            description:
+              'Parabéns, agora é só logar na nossa plataforma com seu email e senha!',
+          });
+            console.log('122232312');
             form.resetFields();
-            console.log(response.mensagem);
+            console.log(response);
          })
-        }catch(err) {
-            setShowErrorAlert(true);
+         .then(() => console.log('alert', showAlert))
+        .catch((err) => {
+          notification['error']({
+            message: 'Não foi possivel cadastrar',
+            description:
+              'Verifique se seus dados estão corretos.',
+          });
             console.log(err);
-        }
-      };
+        })
+      }
    return(
    <div>
       <Header/>      
@@ -129,6 +140,40 @@ const { Content, Footer } = Layout;
                 <Input
                 maxLength={50}
                 placeholder="Insira seu endereço"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+            <Form.Item
+                name="email"
+                label="Email"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Preencha o campo!',
+                  },
+                ]}
+              >
+                <Input
+                maxLength={50}
+                placeholder="Insira seu email" 
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="senha"
+                label="Senha"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Preencha o campo!',
+                  },
+                ]}
+              >
+                <Input
+                maxLength={10}
+                placeholder="Insira uma senha de até 10 caractéres" 
                 />
               </Form.Item>
             </Col>
