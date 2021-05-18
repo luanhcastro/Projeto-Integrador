@@ -20,6 +20,8 @@ const { Content, Footer } = Layout;
             nome: values.nome,
             dataNascimento:values.dataNasc,
             cpf: values.cpf,
+            email: values.email,
+            senha: values.senha,
             endereco: values.endereco,
             qtdPetsdono: values.qtdPetsdono,
             telefone: values.telefone,
@@ -145,6 +147,38 @@ const { Content, Footer } = Layout;
                 <Input
                 maxLength={50}
                 placeholder="Insira seu endereço"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+            <Form.Item
+                name="email"
+                label="Email"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Preencha o campo!',
+                  },
+                ]}
+              >
+                <Input
+                placeholder="Insira seu email" 
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="senha"
+                label="Senha"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Preencha o campo!',
+                  },
+                ]}
+              >
+                <Input
+                placeholder="Insira uma senha" 
                 />
               </Form.Item>
             </Col>
