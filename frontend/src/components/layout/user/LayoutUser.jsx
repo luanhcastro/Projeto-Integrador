@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Header from '../../template/UserHeader'
 import "../Home.css"
-import { Layout, Card, Typography, Form, Input, Button, Row, Col, Alert } from 'antd';
+import { Layout, Card, Typography, Form, Input, Button, Row, Col, notification } from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
 const { Title } = Typography;
@@ -9,12 +9,8 @@ const { Content, Footer } = Layout;
     
     const AdvancedSearchForm = () => {
       const [form] = Form.useForm();
-      const [showAlert, setShowAlert] = useState(false);
-      const [showErrorAlert, setShowErrorAlert] = useState(false);
       const url = 'http://localhost:3001/dono'
       const onFinish = async (values) => {
-         console.log('Received values of form: ', values);
-         try {
          await axios.post(url, 
          {
             nome: values.nome,
@@ -27,14 +23,22 @@ const { Content, Footer } = Layout;
             telefone: values.telefone,
           })
          .then(({ response }) => {
-            setShowAlert(true);
+          notification['success']({
+            message: 'Cadastrado com sucesso',
+            description:
+              'Parabéns, agora é só logar na nossa plataforma com seu email e senha!',
+          });
             form.resetFields();
             console.log(response.mensagem);
          })
-        }catch(err) {
-            setShowErrorAlert(true);
+        .catch((err) => {
+          notification['error']({
+            message: 'Não foi possivel cadastrar',
+            description:
+              'Verifique se seus dados estão corretos.',
+          });
             console.log(err);
-        }
+        })
       };
    return(
    <div>
@@ -43,8 +47,6 @@ const { Content, Footer } = Layout;
          <Content className="site-layout" style={{ padding: '0 200px', minHeight: '800px', marginTop: 110 }}>
          <div className="site-layout-background" style={{ padding: 10 , minHeight: 380 }}>
          <Card style={{ textAlign: 'center', minHeight: '800px' }}title={<Title type="warning">CADASTRO DE CLIENTES</Title>}>
-         {showAlert && ( <Alert message='Cadastro salvo com sucesso!' type='success' showIcon closable/>)}
-         {showErrorAlert && ( <Alert message='Não foi possível efetuar o cadastro' type='error' showIcon closable/>)}
          <Form
          style={{ marginTop: 50 }}
          form={form}
