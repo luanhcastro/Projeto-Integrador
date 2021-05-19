@@ -9,8 +9,6 @@ const { Content, Footer } = Layout;
     
     const AdvancedSearchForm = () => {
       const [form] = Form.useForm();
-      const [showAlert, setShowAlert] = useState(false);
-      const [showErrorAlert, setShowErrorAlert] = useState(false);
       const url = 'http://localhost:3001/cuidador'
       const onFinish = (values) => {
          console.log('Received values of form: ', values);
@@ -52,8 +50,6 @@ const { Content, Footer } = Layout;
          <Content className="site-layout" style={{ padding: '0 200px', minHeight: '800px', marginTop: 110 }}>
          <div className="site-layout-background" style={{ padding: 10 , minHeight: 380 }}>
          <Card style={{ textAlign: 'center', minHeight: '800px' }}title={<Title type="warning">CADASTRO DE CUIDADORES</Title>}>
-         {showAlert && ( <Alert message='Cadastro salvo com sucesso!' type='success' showIcon closable/>)}
-         {showErrorAlert && ( <Alert message='Não foi possível efetuar o cadastro' type='error' showIcon closable/>)}
          <Form
          style={{ marginTop: 50 }}
          form={form}
