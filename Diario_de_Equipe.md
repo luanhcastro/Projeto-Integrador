@@ -123,6 +123,9 @@ Hoje na reunião discutimos sobre a terceira sprint, e dividimos as histórias f
 Participantes: Bianca, Guilherme, Luan, Vinicius.
 
 ## Reunião 9 
+
+# Data: 15/05/2021
+
 - Levantamentos para entregas da terceira sprint
 - Luan e Vinícius cuidarão da parte de login
 - Guilherme auxiliará no frontend na organização e separação das paginas de cada sessão(cuidador ou cliente)
@@ -132,3 +135,16 @@ Participantes: Bianca, Guilherme, Luan, Vinicius.
 - Foi adicionado no banco e no backend os campos de email e senha para iniciar o fluxo de login
 - Foi integrado no frontend o email e senha de cuidadores e clientes
 - Foi tratado o feedback de cadastro de ambos
+
+
+## Reunião 10 
+
+# Data: 18/05/2021
+- Foram definidos os prazos e dependências
+- Vinícius está trabalhando na issue #91
+- Bianca está na issue #85
+- Luan na issue #92
+- Guilherme planejando as #79, #76, #27 e #28
+
+
+
