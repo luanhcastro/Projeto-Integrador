@@ -4,7 +4,7 @@
   "description": "Aplicacao web NannyPet",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "start": "nodemon server.js"
   },
   "author": "Bianca Miazaki, Guilherme Zago, Luan Castro, Vinicius Kuwakino",
@@ -17,5 +17,8 @@
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
     "sequelize": "^6.6.2"
+  },
+  "devDependencies": {
+    "supertest": "^6.1.3"
   }
 }
