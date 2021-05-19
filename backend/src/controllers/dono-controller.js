@@ -34,12 +34,16 @@ module.exports = {
       telefone,
     })
 
+    dono.senha = undefined
+
     return res.json(dono)
   },
 
   // Get Donos
   async getDono(req, res) {
-    const donos = await Dono.findAll()
+    const donos = await Dono.findAll({
+      attributes: { exclude: ['senha'] }
+    })
 
     return res.json(donos)
   },
@@ -48,7 +52,8 @@ module.exports = {
   async getDonoById(req, res) {
     const { idDono } = req.params
     const dono = await Dono.findByPk(idDono, {
-      include: { association: 'pet' }
+      attributes: { exclude: ['senha'] }, // esconde a senha
+      include: { association: 'pet' } // pets relacionados ao dono
     })
 
     return res.json(dono)

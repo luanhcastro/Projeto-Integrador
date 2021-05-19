@@ -39,7 +39,10 @@ module.exports = {
   async getPetById(req, res) {
     const { idPet } = req.params
     const pet = await Pet.findByPk(idPet, {
-      include: { association: 'dono' }
+      include: [ 
+        {association: 'dono', attributes: { exclude: ['senha'] }} // esconde a senha     
+      ]
+      
     })
 
     return res.json(pet)
