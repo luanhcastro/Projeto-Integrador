@@ -10,6 +10,6 @@ router.post('/', AvaliacaoController.postAvaliacao)
 router.get('/', AvaliacaoController.getAvaliacao)
 
 // Retorna Avaliacoes de um Cuidador
-router.get('/:idCuidador', AvaliacaoController.getAvaliacaoById)
+router.get('/:idCuidador', AvaliacaoController.getAvaliacaoByDonoId)
 
 module.exports = router

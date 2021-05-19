@@ -1,6 +1,8 @@
 const Cuidador = require('../models/cuidador')
+const Avaliacao = require('../models/avaliacao')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
+const Fn = Sequelize.fn
 
 module.exports = {
 
@@ -32,16 +34,26 @@ module.exports = {
       dataNascimento,
       cpf,
       endereco,
-      numServicos,
+      numServicos,  // de acordo com o numero de avaliacoes
       telefone,
     })
+
+    cuidador.senha = undefined
 
     return res.json(cuidador)
   },
 
   // Get Cuidadores
   async getCuidador(req, res) {
-    const cuidadores = await Cuidador.findAll()
+    const cuidadores = await Cuidador.findAll({
+      attributes: { 
+        exclude: ['senha'], 
+        include: [[Sequelize.fn('AVG', Sequelize.col('valor')), 'mediaAvaliacoes']]
+      },
+      include: [{
+        model: Avaliacao, as: 'avaliacoes', attributes: []
+      }],
+    })
 
     return res.json(cuidadores)
   },
@@ -50,7 +62,13 @@ module.exports = {
   async getCuidadorById(req, res) {
     const { idCuidador } = req.params
     const cuidador = await Cuidador.findByPk(idCuidador, {
-      include: { association: 'avaliacoes' }
+      attributes: { 
+        exclude: ['senha'], 
+        include: [[Sequelize.fn('AVG', Sequelize.col('valor')), 'mediaAvaliacoes']] // Media das avaliacoes
+      },
+      include: [{
+        model: Avaliacao, as: 'avaliacoes', attributes: []  // incluir tabela de avaliacoes, para fazer a media das avaliacoes
+      }],
     })
 
     return res.json(cuidador)

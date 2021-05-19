@@ -50,8 +50,8 @@ module.exports = {
     const { idServico } = req.params
     const servico = await Servico.findByPk(idServico, {
       include: [
-        { association: 'cuidador' },
-        { association: 'dono' },
+        { association: 'cuidador', attributes: { exclude: ['senha'] }, }, // esconde a senha
+        { association: 'dono', attributes: { exclude: ['senha'] }, }, 
         { association: 'pet' }
       ]
     })

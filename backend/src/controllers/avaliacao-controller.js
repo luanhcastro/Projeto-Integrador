@@ -31,11 +31,14 @@ module.exports = {
   },
 
   // Get Avaliacoes de cada Cuidador
-  async getAvaliacaoById(req, res) {
+  async getAvaliacaoByDonoId(req, res) {
     const { idCuidador } = req.params
     const cuidador = await Cuidador.findByPk(idCuidador, {
       // Inclusao de associacao ou um relacionamento
-      include: { association: 'avaliacoes' }
+      include: { association: 'avaliacoes' },
+      attributes: {
+        exclude: ['senha'] // esconde a senha
+      }
     }) 
     return res.json(cuidador)
   }
