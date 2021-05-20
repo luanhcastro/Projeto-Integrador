@@ -1,11 +1,11 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router'
 
-import Login from '../layout/login/Login'
+import LoginPage from '../layout/login/LoginPage'
 
 
 export default props =>
    <Switch>
-      <Route exact path='/login' component={Login} />
+      <Route exact path='/login' component={LoginPage} />
       <Redirect from='*' to='/' />
    </Switch>
