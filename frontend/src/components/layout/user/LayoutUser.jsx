@@ -7,7 +7,7 @@ import axios from 'axios';
 const { Title } = Typography;
 const { Content, Footer } = Layout;
     
-    const AdvancedSearchForm = () => {
+    const User = () => {
       const [form] = Form.useForm();
       const url = 'http://localhost:3001/dono'
       const onFinish = async (values) => {
@@ -209,4 +209,4 @@ const { Content, Footer } = Layout;
    </div>
    )
 }
-export default AdvancedSearchForm;
+export default User;
