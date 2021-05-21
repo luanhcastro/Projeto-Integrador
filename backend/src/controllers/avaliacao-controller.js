@@ -1,9 +1,12 @@
 const Cuidador = require('../models/cuidador')
 const Avaliacao = require('../models/avaliacao')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 module.exports = {
 
   // Create Avaliacao
+  
   async postAvaliacao(req, res) {
     const { 
       valor,
@@ -23,16 +26,31 @@ module.exports = {
     return res.json(avaliacao)
   },
 
+// ======================================================================================
+
   // Get Avaliacoes
+
   async getAvaliacao(req, res){
     const avaliacoes = await Avaliacao.findAll()
 
     return res.json(avaliacoes)
   },
 
+// ======================================================================================
+
   // Get Avaliacoes de cada Cuidador
+
   async getAvaliacaoByDonoId(req, res) {
     const { idCuidador } = req.params
+
+    const verificacaoId = await Cuidador.findOne({
+      where: {
+        id: { [Op.ne]: idCuidador } // id != id
+      }
+    })
+
+    if (verificacaoId) return res.status(400).json({ error: 'Cuidador nao existe' })
+
     const cuidador = await Cuidador.findByPk(idCuidador, {
       // Inclusao de associacao ou um relacionamento
       include: { association: 'avaliacoes' },
@@ -40,6 +58,7 @@ module.exports = {
         exclude: ['senha'] // esconde a senha
       }
     }) 
+
     return res.json(cuidador)
   }
 }

@@ -12,6 +12,7 @@ const RotaDono = require('./src/routes/dono')
 const RotaAvaliacao = require('./src/routes/avaliacao')
 const RotaPet = require('./src/routes/pet')
 const RotaServico = require('./src/routes/servico')
+const RotaAutenticacao = require('./src/routes/auth')
 
 app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: true })) // aceita apenas dados simples
@@ -32,7 +33,7 @@ app.use((req, res, next) => {
     next()
 })
 
-
+app.use('/auth', RotaAutenticacao)
 app.use('/cuidador', RotaCuidador)
 app.use('/dono', RotaDono)
 app.use('/avaliacao', RotaAvaliacao)
