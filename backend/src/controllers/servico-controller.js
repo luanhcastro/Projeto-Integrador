@@ -2,10 +2,13 @@ const Servico = require('../models/servico')
 const Cuidador = require('../models/cuidador')
 const Dono = require('../models/dono')
 const Pet = require('../models/pet')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 module.exports = {
 
   // Create Servico
+
   async postServico(req, res) {
     const {
       tipo,
@@ -38,14 +41,20 @@ module.exports = {
     return res.json(servico)
   },
 
+// ======================================================================================
+
   // Get Servicos
+
   async getServico(req, res) {
     const servicos = await Servico.findAll()
 
     return res.json(servicos)
   },
 
+// ======================================================================================
+
   //Get Servicos By Id
+
   async getServicoById(req, res) {
     const { idServico } = req.params
     const servico = await Servico.findByPk(idServico, {
@@ -59,7 +68,10 @@ module.exports = {
     return res.json(servico)
   },
 
+// ======================================================================================
+
   // Update Servico
+
   async updateServico(req, res) {
     const {
       idServico,
@@ -68,6 +80,14 @@ module.exports = {
       dataInicio,
       dataFinal,
     } = req.body
+
+    const verificaServico = await Servico.findOne({
+      where: {
+        id: { [Op.ne]: idServico } // id != id
+      }
+    })
+
+    if (verificaServico) return res.status(400).send({ error: "Id nao correspondente" })
 
     const servico = await Servico.update({
       tipo,
@@ -80,10 +100,14 @@ module.exports = {
       }
     })
 
-    return res.json(servico)
+    if (servico) return res.json({ mensagem: "Servico Alterado Com Sucesso" })
+    if (!servico) return res.json({ error: "Erro Ao Alterar Servico" })
   },
 
+// ======================================================================================
+
   // Delete Servico
+  
   async deleteServico(req, res) {
     const { idServico } = req.body
     const servico = await Servico.destroy({
@@ -92,7 +116,8 @@ module.exports = {
       }
     })
 
-    return res.json(servico)
+    if (servico) return res.json({ mensagem: "Servico Deletado" })
+    if (!servico) return res.json({ error: "Erro Ao Deletar Servico" })
   }
 
 }
