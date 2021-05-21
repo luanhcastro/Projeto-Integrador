@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../../template/UserHeader'
 import "../Home.css"
 import { Layout, Card, Typography, Form, Input, Button, Row, Col, notification, Select } from 'antd';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import axios from 'axios';
 const { Title } = Typography;
@@ -62,7 +63,8 @@ const Login = () => {
                                                 },
                                             ]}
                                         >
-                                            <Input
+                                            <Input.Password
+                                                iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                                 placeholder="Insira uma senha"
                                             />
                                         </Form.Item>
