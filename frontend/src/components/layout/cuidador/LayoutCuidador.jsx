@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import Header from '../../template/UserHeader'
 import "../Home.css"
 import { Layout, Card, Typography, Form, Input, notification, Button, Row, Col, Alert } from 'antd';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import axios from 'axios';
 const { Title } = Typography;
@@ -170,8 +171,9 @@ const { Content, Footer } = Layout;
                   },
                 ]}
               >
-                <Input
-                placeholder="Insira uma senha" 
+                <Input.Password 
+                placeholder="Insira uma senha"
+                iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} 
                 />
               </Form.Item>
             </Col>
