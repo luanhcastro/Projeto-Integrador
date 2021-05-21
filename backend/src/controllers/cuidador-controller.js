@@ -60,7 +60,6 @@ module.exports = {
     const cuidadores = await Cuidador.findAll({
       attributes: { 
         exclude: ['senha'], 
-        include: [[Sequelize.fn('AVG', Sequelize.col('valor')), 'mediaAvaliacoes']]
       },
       include: [{
         model: Avaliacao, as: 'avaliacoes', attributes: []
