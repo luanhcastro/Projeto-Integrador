@@ -22,14 +22,13 @@ const { Content, Footer } = Layout;
             qtdPetsdono: values.qtdPetsdono,
             telefone: values.telefone,
           })
-         .then(({ response }) => {
+         .then(() => {
           notification['success']({
             message: 'Cadastrado com sucesso',
             description:
               'Parabéns, agora é só logar na nossa plataforma com seu email e senha!',
           });
             form.resetFields();
-            console.log(response.mensagem);
          })
         .catch((err) => {
           notification['error']({
