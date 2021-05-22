@@ -2,11 +2,14 @@ const Cuidador = require('../models/cuidador')
 const Avaliacao = require('../models/avaliacao')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
-const Fn = Sequelize.fn
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const authConfig = require('../config/auth.json')
 
 module.exports = {
 
   // Create Cuidador
+
   async postCuidador(req, res) {
     const {
       nome,
@@ -38,17 +41,25 @@ module.exports = {
       telefone,
     })
 
-    cuidador.senha = undefined
+    const hash = await bcrypt.hash(cuidador.senha, 10)  // criptografia HASH 
+
+    cuidador.senha = hash // senha recebe a senha criptografada
+    
+    await cuidador.save() // senha criptografada foi atualizada no banco de dados
+
+    cuidador.senha = undefined  // esconder a senha
 
     return res.json(cuidador)
   },
 
+// ======================================================================================
+
   // Get Cuidadores
+
   async getCuidador(req, res) {
     const cuidadores = await Cuidador.findAll({
       attributes: { 
         exclude: ['senha'], 
-        include: [[Sequelize.fn('AVG', Sequelize.col('valor')), 'mediaAvaliacoes']]
       },
       include: [{
         model: Avaliacao, as: 'avaliacoes', attributes: []
@@ -57,8 +68,11 @@ module.exports = {
 
     return res.json(cuidadores)
   },
+  
+// ======================================================================================
 
   // Get Cuidador By Id
+
   async getCuidadorById(req, res) {
     const { idCuidador } = req.params
     const cuidador = await Cuidador.findByPk(idCuidador, {
@@ -74,7 +88,10 @@ module.exports = {
     return res.json(cuidador)
   },
 
+// ======================================================================================
+
   // Update Cuidador
+
   async updateCuidador(req, res) {
     const {
       id,
@@ -87,26 +104,37 @@ module.exports = {
       telefone,
     } = req.body
 
+    const verificacaoId = await Cuidador.findOne({
+      where: {
+        email: { [Op.eq]: email },  // email == email
+        telefone: { [Op.eq]: telefone },  // telefone == telefone
+        id: { [Op.ne]: id } // id != id
+      }
+    })
+
     const verificacaoEmail = await Cuidador.findOne({ 
       where: { 
-        email: email,
+        email: { [Op.eq]: email },  // email == email
         id: { [Op.ne]: id } // id != id
       }
     })
     
     const verificacaoTelefone = await Cuidador.findOne({ 
       where: { 
-        telefone: telefone,
+        telefone: { [Op.eq]: telefone },  // telefone == telefone
         id: { [Op.ne]: id } // id != id
       } 
     })
 
+    if (verificacaoId) return res.status(400).send({ error: "ID não corresponde a este Cuidador" })
     if (verificacaoEmail) return res.status(400).send({ error: "Email ja existe" })
     if (verificacaoTelefone) return res.status(400).send({ error: "Telefone ja existe" })
+    
+    const hash = await bcrypt.hash(senha, 10)  // criptografia HASH 
 
     const cuidador = await Cuidador.update({
       nome,
-      senha,
+      senha: hash,
       email,
       dataNascimento,
       endereco,
@@ -114,14 +142,18 @@ module.exports = {
       telefone,
     }, {
       where: {
-        id: id
+        id: { [Op.eq]: id } // id == id
       }
     })
-    
-    return res.json(cuidador)
+
+    if (cuidador) return res.json({ mensagem: "Cuidador Alterado Com Sucesso" })
+    if (!cuidador) return res.json({ error: "Erro Ao Alterar Cuidador" })
   },
 
+// ======================================================================================
+
   // Delete Cuidador
+
   async deleteCuidador(req, res) {
     const { idCuidador } = req.body
     const cuidador = await Cuidador.destroy({
@@ -130,7 +162,39 @@ module.exports = {
       }
     })
 
-    return res.json(cuidador)
+    if (cuidador) return res.json({ mensagem: "Cuidador Deletado" })
+    if (!cuidador) return res.json({ error: "Erro Ao Deletar Cuidador" })
+  },
+
+// ======================================================================================
+
+  // Login Cuidador
+
+  async login(req, res) {
+    const { email, senha } = req.body
+    
+    const cuidador = await Cuidador.findOne({
+      where: {
+        email: email
+      }
+    })
+
+    if (!cuidador) {
+      return res.status(400).send({ error: 'Cuidador nao encontrado' })
+    }
+
+    if (!await bcrypt.compare(senha, cuidador.senha)) {
+      return res.status(400).send({ error: 'Senha invalida' })
+    }
+
+    cuidador.senha = undefined
+
+    // authConfig -> hash para criacao das senhas 
+    const token = jwt.sign({ id: cuidador.id }, authConfig.hashing, {
+      expiresIn: 7200,  // parametro que passa o tempo que o token ira expirar, no caso 1 hora = 7200 segundos
+    })
+    
+    return res.json({ cuidador, token })
   }
 }
 

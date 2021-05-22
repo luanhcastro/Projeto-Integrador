@@ -4,6 +4,7 @@ const Pet = require('../models/pet')
 module.exports = {
 
   // Create Pet
+
   async postPet(req, res) {
     const {
       nomePet,
@@ -28,14 +29,20 @@ module.exports = {
     return res.json(pet)
   },
 
+// ======================================================================================
+
   // Get Pets
+
   async getPet(req, res) {
     const pets = await Pet.findAll()
 
     return res.json(pets)
   },
 
+// ======================================================================================
+
   // Get Pet By Id
+
   async getPetById(req, res) {
     const { idPet } = req.params
     const pet = await Pet.findByPk(idPet, {
@@ -48,7 +55,10 @@ module.exports = {
     return res.json(pet)
   },
 
+// ======================================================================================
+
   // Update Pet
+
   async updatePet(req, res) {
     const {
       idPet,
@@ -69,10 +79,14 @@ module.exports = {
       }
     })
 
-    return res.json(pet)
+    if (pet) return res.json({ mensagem: "Pet Alterado Com Sucesso" })
+    if (!pet) return res.json({ error: "Erro Ao Alterar Pet" })
   },
 
+// ======================================================================================
+
   // Delete Pet
+  
   async deletePet(req, res) {
     const { idPet } = req.body
     const pet = await Pet.destroy({
@@ -81,7 +95,8 @@ module.exports = {
       }
     })
 
-    return res.json(pet)
+    if (pet) return res.json({ mensagem: "Pet Deletado" })
+    if (!pet) return res.json({ error: "Erro Ao Deletar Pet" })
   }
 
 }

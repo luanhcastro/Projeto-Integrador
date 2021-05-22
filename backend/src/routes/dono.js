@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const auth = require('../middlewares/auth')
 
 const DonoController = require('../controllers/dono-controller')
 
@@ -13,9 +14,12 @@ router.get('/', DonoController.getDono)
 router.get('/:idDono', DonoController.getDonoById)
 
 // Altera dados do Dono
-router.patch('/', DonoController.updateDono)
+router.patch('/', auth, DonoController.updateDono)
 
 // Excluir um Dono
-router.delete('/', DonoController.deleteDono)
+router.delete('/', auth, DonoController.deleteDono)
+
+// Login de Dono
+router.post ('/loginDono', DonoController.login)
 
 module.exports = router
