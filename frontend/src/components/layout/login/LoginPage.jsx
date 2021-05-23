@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../../template/UserHeader'
 import "../Home.css"
+
+import { useLocation } from 'react-router'
 import { Layout, Card, Typography, Form, Input, Button, Row, Col, notification, Select } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import 'antd/dist/antd.css';
@@ -8,7 +10,10 @@ import axios from 'axios';
 const { Title } = Typography;
 const { Content, Footer } = Layout;
 const { Option } = Select;
-const Login = () => {
+const Login = props => {
+ 
+    const [tipo, setTipo] = useState();
+    console.log(tipo);
     const [form] = Form.useForm();
     const url = 'http://localhost:3001/dono/loginDono'
     const onFinish = async (values) => {
@@ -20,17 +25,21 @@ const Login = () => {
        .then(response => {
         console.log(response.data);
         localStorage.setItem("token", JSON.stringify(response.data.token));
-        localStorage.setItem("id", JSON.stringify(response.data.dono.id));
-        window.location = '/pet#/pet';
+           localStorage.setItem("id", JSON.stringify(response.data.dono.id));
+           
+           window.location = tipo === 'Cuidador' ? '/pet/cuidador/home#' : '/pet/usuario/home#'; 
     })
       .catch((err) => {
         notification['error']({
-          message: 'Não foi possivel cadastrar',
+          message: 'Não foi possivel realizar o login',
           description:
             'Verifique se seus dados estão corretos.',
         });
           console.log(err);
       })
+    };
+    function handleChange(value) {
+        setTipo(value);
     };
     return (
         <div>
@@ -50,9 +59,9 @@ const Login = () => {
                             >
                                 <Row gutter={24} style={{justifyContent: 'center'}}>
                                     <Col spam={24} >
-                                        <Select defaultValue="Cliente" style={{ minwidth: 200 }} labelInValue label="Sou um:">
-                                            <Option value="jack">Cliente</Option>
-                                            <Option value="lucy">Cuidador</Option>
+                                        <Select defaultValue="Cliente" style={{ width: 200 }} labelInValue="Entrar como um:" onChange={handleChange}>
+                                            <Option value="cliente" >Cliente</Option>
+                                            <Option value="cuidador" >Cuidador</Option>
                                         </Select>
                                     </Col>
                                     <Col span={24}>

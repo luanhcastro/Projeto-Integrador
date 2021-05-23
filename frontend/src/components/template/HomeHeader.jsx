@@ -8,20 +8,23 @@ import { HeartOutlined, UserOutlined, LoginOutlined } from '@ant-design/icons';
 const { Header } = Layout;
 
 export default props =>
-<Header class="defaultHeader">
-<Link to="/">
-<img src={logo} alt='logo' class="logo"/>
-      </Link>  
-  <div theme="light" mode="horizontal" class="buttons" style={{  }}defaultSelectedKeys={['2']}>
-      <Link to="/usuario">
-         <Button type="primary" size="large" style={{margin: 10}} icon={(<UserOutlined style={{fontSize:20}}/>)}>USUÁRIO</Button>
+   <Header class="defaultHeader">
+      <Link to="/">
+         <img src={logo} alt='logo' class="logo" />
       </Link>
-      <Link to="/cuidador">
-         <Button type="primary" size="large" style={{margin: 10}} icon={(<HeartOutlined style={{fontSize:20}}/>)}>CUIDADOR</Button>
-      </Link>
-      <Link to="/login">
-         <Button type="primary" size="large" style={{margin: 10}} icon={(<LoginOutlined style={{fontSize:20}}/>)}>LOGIN</Button>
-      </Link>
-  </div>
-</Header>
+      <div theme="light" mode="horizontal" class="buttons" style={{}} defaultSelectedKeys={['2']}>
+         {/* <Link to="/usuario">
+            <Button type="primary" size="large" style={{ margin: 10 }} icon={(<UserOutlined style={{ fontSize: 20 }} />)}>USUÁRIO</Button>
+         </Link>
+         <Link to="/cuidador">
+            <Button type="primary" size="large" style={{ margin: 10 }} icon={(<HeartOutlined style={{ fontSize: 20 }} />)}>CUIDADOR</Button>
+         </Link> */}
+         <Link to="/login">
+            <Button type="primary" size="large" style={{ margin: 10 }} icon={(<LoginOutlined style={{ fontSize: 20 }} />)}>LOGIN</Button>
+         </Link>
+         <Link to="/sign">
+            <Button type="primary" size="large" style={{ margin: 10 }} icon={(<LoginOutlined style={{ fontSize: 20 }} />)}>SIGNUP</Button>
+         </Link>
+      </div>
+   </Header>
 

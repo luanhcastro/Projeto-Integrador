@@ -1,0 +1,39 @@
+:root {
+   --bg-dark: #1A2F3A;
+   --header-height: 130px;
+   --footer-height: 50px;
+   --shadow:
+      0 2px 23px 0 rgba(0, 0, 0, 0.1),
+      0 2px 49px 0 rgba(0, 0, 0, 0.06),
+}
+
+* {
+   box-sizing: border-box;
+   font-family: 'Montserrat', sans-serif;
+}
+
+/* Layout em Grid */
+
+.app {
+   margin: 0px;
+   display: grid;
+   grid-template-rows: 
+      var(--header-height)
+      1fr
+      var(--footer-height);
+   grid-template-areas: 
+      "header"
+      "content"
+      "footer";
+   height: 100vh;
+   background-color: #F5F5F5;
+}
+
+header.header {
+   grid-area: header;
+}
+
+footer.footer {
+   grid-area: footer;
+}
+
