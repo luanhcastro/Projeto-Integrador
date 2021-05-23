@@ -5,7 +5,7 @@ import HomePage from '../components/navigation/Homepage'
 import UserRoute from '../components/navigation/RoutesUser'
 import CuidadorRoute from '../components/navigation/RoutesCuidador'
 import LoginRoute from '../components/navigation/RoutesLogin'
-import PetRoute from '../components/navigation/RoutesDonoNavegacao'
+import PetRoute from '../components/navigation/RoutesPet'
 
 
 export default props =>
