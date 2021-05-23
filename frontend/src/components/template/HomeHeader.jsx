@@ -4,7 +4,7 @@ import "./Header.css"
 import { Link } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import { Layout, Menu, Breadcrumb, Button, List, Avatar } from 'antd';
-import { HeartOutlined, UserOutlined } from '@ant-design/icons';
+import { HeartOutlined, UserOutlined, LoginOutlined } from '@ant-design/icons';
 const { Header } = Layout;
 
 export default props =>
@@ -19,7 +19,9 @@ export default props =>
       <Link to="/cuidador">
          <Button type="primary" size="large" style={{margin: 10}} icon={(<HeartOutlined style={{fontSize:20}}/>)}>CUIDADOR</Button>
       </Link>
-      
+      <Link to="/login">
+         <Button type="primary" size="large" style={{margin: 10}} icon={(<LoginOutlined style={{fontSize:20}}/>)}>LOGIN</Button>
+      </Link>
   </div>
 </Header>
 

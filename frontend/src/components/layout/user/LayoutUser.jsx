@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React  from 'react'
 import Header from '../../template/UserHeader'
 import "../Home.css"
 import { Layout, Card, Typography, Form, Input, Button, Row, Col, notification } from 'antd';
@@ -8,7 +8,7 @@ import axios from 'axios';
 const { Title } = Typography;
 const { Content, Footer } = Layout;
     
-    const AdvancedSearchForm = () => {
+    const User = () => {
       const [form] = Form.useForm();
       const url = 'http://localhost:3001/dono'
       const onFinish = async (values) => {
@@ -23,14 +23,13 @@ const { Content, Footer } = Layout;
             qtdPetsdono: values.qtdPetsdono,
             telefone: values.telefone,
           })
-         .then(({ response }) => {
+         .then(() => {
           notification['success']({
             message: 'Cadastrado com sucesso',
             description:
               'Parabéns, agora é só logar na nossa plataforma com seu email e senha!',
           });
             form.resetFields();
-            console.log(response.mensagem);
          })
         .catch((err) => {
           notification['error']({
@@ -211,4 +210,4 @@ const { Content, Footer } = Layout;
    </div>
    )
 }
-export default AdvancedSearchForm;
+export default User;

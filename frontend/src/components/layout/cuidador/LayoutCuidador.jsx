@@ -8,10 +8,8 @@ import axios from 'axios';
 const { Title } = Typography;
 const { Content, Footer } = Layout;
     
-    const AdvancedSearchForm = () => {
+    const Cuidador = () => {
       const [form] = Form.useForm();
-      const [showAlert, setShowAlert] = useState(false);
-      const [showErrorAlert, setShowErrorAlert] = useState(false);
       const url = 'http://localhost:3001/cuidador'
       const onFinish = (values) => {
          console.log('Received values of form: ', values);
@@ -36,7 +34,6 @@ const { Content, Footer } = Layout;
             form.resetFields();
             console.log(response);
          })
-         .then(() => console.log('alert', showAlert))
         .catch((err) => {
           notification['error']({
             message: 'Não foi possivel cadastrar',
@@ -53,8 +50,6 @@ const { Content, Footer } = Layout;
          <Content className="site-layout" style={{ padding: '0 200px', minHeight: '800px', marginTop: 110 }}>
          <div className="site-layout-background" style={{ padding: 10 , minHeight: 380 }}>
          <Card style={{ textAlign: 'center', minHeight: '800px' }}title={<Title type="warning">CADASTRO DE CUIDADORES</Title>}>
-         {showAlert && ( <Alert message='Cadastro salvo com sucesso!' type='success' showIcon closable/>)}
-         {showErrorAlert && ( <Alert message='Não foi possível efetuar o cadastro' type='error' showIcon closable/>)}
          <Form
          style={{ marginTop: 50 }}
          form={form}
@@ -202,4 +197,4 @@ const { Content, Footer } = Layout;
    </div>
    )
 }
-export default AdvancedSearchForm;
+export default Cuidador;
