@@ -10,8 +10,27 @@ const { Content, Footer } = Layout;
 const { Option } = Select;
 const Login = () => {
     const [form] = Form.useForm();
+    const url = 'http://localhost:3001/dono/loginDono'
     const onFinish = async (values) => {
-        console.log(values);
+       await axios.post(url, 
+       {
+          email: values.email,
+          senha: values.senha,
+        })
+       .then(response => {
+        console.log(response.data);
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        localStorage.setItem("id", JSON.stringify(response.data.dono.id));
+        window.location = '/pet#/pet';
+    })
+      .catch((err) => {
+        notification['error']({
+          message: 'Não foi possivel cadastrar',
+          description:
+            'Verifique se seus dados estão corretos.',
+        });
+          console.log(err);
+      })
     };
     return (
         <div>
@@ -31,7 +50,7 @@ const Login = () => {
                             >
                                 <Row gutter={24} style={{justifyContent: 'center'}}>
                                     <Col spam={24} >
-                                        <Select defaultValue="Cliente" style={{ minwidth: 200 }} label="Sou um:" onChange="">
+                                        <Select defaultValue="Cliente" style={{ minwidth: 200 }} labelInValue label="Sou um:">
                                             <Option value="jack">Cliente</Option>
                                             <Option value="lucy">Cuidador</Option>
                                         </Select>
