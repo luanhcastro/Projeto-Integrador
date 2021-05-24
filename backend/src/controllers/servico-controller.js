@@ -34,7 +34,6 @@ module.exports = {
     const pet = await Pet.findByPk(idPet)
     var dataAtual = dataFormatada() // formata a data atual (yyyy-mm-dd)
 
-    // 
     if (!cuidador) return res.status(400).json({ error: 'Cuidador nao existe' })
     if (!dono) return res.status(400).json({ error: 'Dono nao existe' })
     if (!pet) return res.status(400).json({ error: 'Pet nao existe' })
