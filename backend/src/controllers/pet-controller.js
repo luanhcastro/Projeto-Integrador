@@ -52,6 +52,8 @@ module.exports = {
       
     })
 
+    if (!pet) return res.status(400).send({ error: "Nao existe Pet com este ID" })
+
     return res.json(pet)
   },
 

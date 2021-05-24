@@ -1,5 +1,6 @@
 const Cuidador = require('../models/cuidador')
 const Avaliacao = require('../models/avaliacao')
+const Servico = require('../models/servico')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const bcrypt = require('bcryptjs')
@@ -18,7 +19,6 @@ module.exports = {
       dataNascimento,
       cpf,
       endereco,
-      numServicos,
       telefone,
     } = req.body
 
@@ -37,7 +37,6 @@ module.exports = {
       dataNascimento,
       cpf,
       endereco,
-      numServicos,  // de acordo com o numero de avaliacoes
       telefone,
     })
 
@@ -75,13 +74,22 @@ module.exports = {
 
   async getCuidadorById(req, res) {
     const { idCuidador } = req.params
+
+    const verificarCuidador = await Cuidador.findOne({
+      where: {
+        id: { [Op.eq]: idCuidador } // id == id
+      }
+    })
+
+    if (!verificarCuidador) return res.status(400).send({ error: "Nao existe Cuidador com este ID" })
+
     const cuidador = await Cuidador.findByPk(idCuidador, {
       attributes: { 
         exclude: ['senha'], 
-        include: [[Sequelize.fn('AVG', Sequelize.col('valor')), 'mediaAvaliacoes']] // Media das avaliacoes
+        include: [[Sequelize.fn('AVG', Sequelize.col('valor')), 'mediaAvaliacoes']],  // Media das avaliacoes
       },
       include: [{
-        model: Avaliacao, as: 'avaliacoes', attributes: []  // incluir tabela de avaliacoes, para fazer a media das avaliacoes
+        model: Avaliacao, as: 'avaliacoes', attributes: [],  // incluir tabela de avaliacoes, para fazer a media das avaliacoes
       }],
     })
 
@@ -100,7 +108,6 @@ module.exports = {
       email,
       dataNascimento,
       endereco,
-      numServicos,
       telefone,
     } = req.body
 
@@ -138,7 +145,6 @@ module.exports = {
       email,
       dataNascimento,
       endereco,
-      numServicos,
       telefone,
     }, {
       where: {

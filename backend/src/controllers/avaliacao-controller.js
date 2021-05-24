@@ -45,11 +45,11 @@ module.exports = {
 
     const verificacaoId = await Cuidador.findOne({
       where: {
-        id: { [Op.ne]: idCuidador } // id != id
+        id: { [Op.eq]: idCuidador } // id == id
       }
     })
-
-    if (verificacaoId) return res.status(400).json({ error: 'Cuidador nao existe' })
+    
+    if (!verificacaoId) return res.status(400).json({ error: 'Cuidador nao existe' })
 
     const cuidador = await Cuidador.findByPk(idCuidador, {
       // Inclusao de associacao ou um relacionamento
