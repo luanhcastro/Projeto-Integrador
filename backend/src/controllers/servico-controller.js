@@ -5,6 +5,15 @@ const Pet = require('../models/pet')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
+function dataFormatada() {  // funcao para formatar a data
+  var data = new Date()
+  var dia = data.getDate().toString().padStart(2, '0')  // aceita datas como: 01, 02, 03, assim como: 1, 2, 3
+  var mes = (data.getMonth() + 1).toString().padStart(2, '0') // aceita meses como: 01, 02, 03, assim como: 1, 2, 3
+  var ano = data.getFullYear()
+
+  return ano + "-" + mes + "-" + dia
+}
+
 module.exports = {
 
   // Create Servico
@@ -23,10 +32,21 @@ module.exports = {
     const cuidador = await Cuidador.findByPk(idCuidador)
     const dono = await Dono.findByPk(idDono)
     const pet = await Pet.findByPk(idPet)
+    var dataAtual = dataFormatada() // formata a data atual (yyyy-mm-dd)
 
+    // 
     if (!cuidador) return res.status(400).json({ error: 'Cuidador nao existe' })
     if (!dono) return res.status(400).json({ error: 'Dono nao existe' })
     if (!pet) return res.status(400).json({ error: 'Pet nao existe' })
+
+    if (req.body.dataInicio < dataAtual) return res.status(400).send({ error: "Data de inicio invalida" })
+    if (req.body.dataFinal < req.body.dataInicio) return res.status(400).send({ error: "Data de fim invalida" })
+
+    const numeroServicos = await Cuidador.findByPk(req.body.idCuidador)
+
+    numeroServicos.numServicos = numeroServicos.numServicos + 1 // Incrementa mais um servico 
+
+    await numeroServicos.save() // senha criptografada foi atualizada no banco de dados
 
     const servico = await Servico.create({
       tipo,
