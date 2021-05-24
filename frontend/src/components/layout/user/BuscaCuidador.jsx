@@ -18,7 +18,7 @@ const AdvancedSearchForm = () => {
    const [form] = Form.useForm();
    const [showAlert, setShowAlert] = useState(false);
    const [showErrorAlert, setShowErrorAlert] = useState(false);
-   const url = 'http://localhost:3001/profilecuidador'
+   const url = 'http://localhost:3001/profileuser'
    const onFinish = (values) => {
       console.log('Received values of form: ', values);
       axios.post(url,
@@ -58,11 +58,11 @@ const AdvancedSearchForm = () => {
    return (
       <div>
          <Header class="defaultHeader">
-            <Link to="/homeCuidador">
+            <Link to="/homeUsuario">
                <img src={logo} alt='logo' class="logo" />
             </Link>
             <div theme="light" mode="horizontal" class="buttons">
-               <Link to='/homeCuidador' >
+               <Link to='/homeUsuario' >
                   <Button type="primary" size="large" style={{ margin: 10 }}
                      icon={(<ArrowLeftOutlined style={{ fontSize: 20 }} />)}
                   >VOLTAR</Button>
@@ -72,7 +72,7 @@ const AdvancedSearchForm = () => {
          <Card style={{ width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.105)' }}>
             <Content className="site-layout" style={{ padding: '0 200px', minHeight: '800px', marginTop: 110 }}>
                <div className="site-layout-background" style={{ padding: 10, minHeight: 380 }}>
-                  <Card style={{ textAlign: 'center', minHeight: '800px' }} title={<Title type="warning">PERFIL DE CUIDADOR</Title>}>
+                  <Card style={{ textAlign: 'center', minHeight: '800px' }} title={<Title type="warning">BUSCA CUIDADOR</Title>}>
                      {showAlert && (<Alert message='Cadastro salvo com sucesso!' type='success' showIcon closable />)}
                      {showErrorAlert && (<Alert message='Não foi possível efetuar o cadastro' type='error' showIcon closable />)}
 

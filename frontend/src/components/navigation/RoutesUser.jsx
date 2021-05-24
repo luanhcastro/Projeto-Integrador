@@ -8,6 +8,5 @@ import UserHome from '../layout/user/LayoutUserHome'
 export default props =>
    <Switch>
       <Route exact path='/usuario' component={LayoutUser} />
-      <Route path='/usuario/home' component={UserHome} />
-      <Redirect from='*' to='/usuario' />
+      <Redirect from='*' to='/' />
    </Switch>

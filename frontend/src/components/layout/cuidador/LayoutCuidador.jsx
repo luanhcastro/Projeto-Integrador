@@ -185,9 +185,7 @@ const Cuidador = () => {
                     >
                       Limpar campos
                   </Button>
-                    <Link to={{
-                      path: "/login",
-                    }} > 
+                    <Link to='/login' > 
                       <Button type="primary" htmlType="submit">
                         Enviar
                   </Button>

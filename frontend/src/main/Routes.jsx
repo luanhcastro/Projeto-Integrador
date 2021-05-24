@@ -6,9 +6,8 @@ import UserRoute from '../components/navigation/RoutesUser'
 import CuidadorRoute from '../components/navigation/RoutesCuidador'
 import LoginRoute from '../components/navigation/RoutesLogin'
 import SignRoute from '../components/navigation/RoutesSign'
-import PetRoute from '../components/navigation/RoutesPet'
-import LayoutHomeCuidador from '../components/layout/cuidador/LayoutHomeCuidador'
-import UserHome from '../components/layout/user/LayoutUserHome'
+import HomeCuidador from '../components/navigation/RoutesCuidadorHome'
+import HomeUsuario from '../components/navigation/RoutesUsuarioHome'
 
 
 export default props =>
@@ -18,6 +17,8 @@ export default props =>
       <Route path='/cuidador' component={CuidadorRoute} />
       <Route path='/sign' component={SignRoute} />
       <Route path='/login' component={LoginRoute} /> 
-      <Route path='/pet' component={PetRoute} />
+      <Route path='/homeCuidador' component={HomeCuidador} /> 
+      <Route path='/homeUsuario' component={HomeUsuario} /> 
+      
       <Redirect from='*' to='/' />
    </Switch>

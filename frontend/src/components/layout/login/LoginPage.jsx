@@ -27,7 +27,7 @@ const Login = props => {
         localStorage.setItem("token", JSON.stringify(response.data.token));
            localStorage.setItem("id", JSON.stringify(response.data.dono.id));
            
-           window.location = tipo === 'Cuidador' ? '/pet/cuidador/home#' : '/pet/usuario/home#'; 
+           window.location = tipo === 'Cuidador' ? '/pet#/homeCuidador' : '/pet#/homeUsuario';
     })
       .catch((err) => {
         notification['error']({
