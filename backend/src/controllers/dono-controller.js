@@ -143,7 +143,7 @@ module.exports = {
     const { idDono } = req.body
     const dono = await Dono.destroy({
       where: {
-        id: idDono
+        id: { [Op.eq]: idDono } // id == id
       }
     })
 

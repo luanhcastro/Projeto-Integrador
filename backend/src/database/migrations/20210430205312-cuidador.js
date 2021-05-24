@@ -26,7 +26,7 @@ module.exports = {
         }
       },
       dataNascimento: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false,
       },
       cpf: {
@@ -40,6 +40,7 @@ module.exports = {
       },
       numServicos: {
         type: Sequelize.INTEGER,
+        defaultValue: 0,
         allowNull: false,
       },
       telefone: {
