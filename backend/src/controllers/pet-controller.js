@@ -1,5 +1,7 @@
 const Dono = require('../models/dono')
 const Pet = require('../models/pet')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 
 module.exports = {
 
@@ -77,7 +79,7 @@ module.exports = {
       idade,
     }, {
       where: {
-        id: idPet
+        id: { [Op.eq]: idPet }
       }
     })
 
@@ -93,7 +95,7 @@ module.exports = {
     const { idPet } = req.body
     const pet = await Pet.destroy({
       where: {
-        id: idPet
+        id: { [Op.eq]: idPet }
       }
     })
 

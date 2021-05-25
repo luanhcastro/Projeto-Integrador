@@ -124,7 +124,7 @@ module.exports = {
       dataFinal,
     }, {
       where: {
-        id: idServico
+        id: { [Op.eq]: idServico }  // id == id
       }
     })
 
@@ -140,7 +140,7 @@ module.exports = {
     const { idServico } = req.body
     const servico = await Servico.destroy({
       where: {
-        id: idServico
+        id: { [Op.eq]: idServico }  // id != id
       }
     })
 
