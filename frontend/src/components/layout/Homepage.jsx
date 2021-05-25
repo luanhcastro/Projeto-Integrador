@@ -17,7 +17,9 @@ const images = [
    { url: "https://www.encrenquinhas.com.br/images/ap-smart-layerslider/homepage/slide-14.jpg" },
 ];
 
-export default () => (
+export default () => {
+   localStorage.clear();
+   return(
    <div>
       <Header/>
       <Card style={{ width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.105)'}}>
@@ -51,3 +53,4 @@ export default () => (
       <Footer style={{ textAlign: 'center' }}>Nanny Pet ©2021 Criado por Vinícius, Bianca, Guilherme e Luan</Footer>
    </div>
    )
+}
