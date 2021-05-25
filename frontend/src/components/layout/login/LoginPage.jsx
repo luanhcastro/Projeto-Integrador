@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import Header from '../../template/UserHeader'
 import "../Home.css"
-
-import { useLocation } from 'react-router'
 import { Layout, Card, Typography, Form, Input, Button, Row, Col, notification, Select } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import 'antd/dist/antd.css';
@@ -11,35 +9,35 @@ const { Title } = Typography;
 const { Content, Footer } = Layout;
 const { Option } = Select;
 const Login = props => {
- 
-    const [tipo, setTipo] = useState();
-    console.log(tipo);
+
+    const [tipo, setTipo] = useState('cliente');
+    console.log(tipo.key);
     const [form] = Form.useForm();
-    const url = 'http://localhost:3001/dono/loginDono'
+    const url = `http://localhost:3001/${tipo}`
     const onFinish = async (values) => {
-       await axios.post(url, 
-       {
-          email: values.email,
-          senha: values.senha,
-        })
-       .then(response => {
-        console.log(response.data);
-        localStorage.setItem("token", JSON.stringify(response.data.token));
-           localStorage.setItem("id", JSON.stringify(response.data.dono.id));
-           
-           window.location = tipo === 'Cuidador' ? '/pet#/homeCuidador' : '/pet#/homeUsuario';
-    })
-      .catch((err) => {
-        notification['error']({
-          message: 'Não foi possivel realizar o login',
-          description:
-            'Verifique se seus dados estão corretos.',
-        });
-          console.log(err);
-      })
+        await axios.post(url,
+            {
+                email: values.email,
+                senha: values.senha,
+            })
+            .then(response => {
+                console.log(response.data);
+                localStorage.setItem("token", JSON.stringify(response.data.token));
+                localStorage.setItem("id", JSON.stringify(response.data.dono.id));
+                window.location = tipo === 'cuidador' ? '/pet#/homeCuidador' : '/pet#/homeUsuario';
+            })
+            .catch((err) => {
+                notification['error']({
+                    message: 'Não foi possivel realizar o login',
+                    description:
+                        'Verifique se seus dados estão corretos.',
+                });
+                console.log(err);
+            })
     };
     function handleChange(value) {
-        setTipo(value);
+        console.log(value);
+        value.key === 'dono' ? setTipo(`${value.key}/loginDono`) : setTipo(`${value.key}/loginCuidador`)
     };
     return (
         <div>
@@ -47,7 +45,7 @@ const Login = props => {
             <Card style={{ width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.105)' }}>
                 <Content className="site-layout" style={{ display: 'flex', justifyContent: 'center', minHeight: '600px', marginTop: 110 }}>
                     <div className="site-layout-background" style={{ maxWidth: '600px', padding: 10, minHeight: 380 }}>
-                        <Card style={{ textAlign: 'center', minHeight: '800px'}} title={<Title type="warning">LOGIN</Title>}>
+                        <Card style={{ textAlign: 'center', minHeight: '800px' }} title={<Title type="warning">LOGIN</Title>}>
                             <Form
                                 style={{ marginTop: 50 }}
                                 form={form}
@@ -57,12 +55,18 @@ const Login = props => {
                                 onFinish={onFinish}
                                 size="large"
                             >
-                                <Row gutter={24} style={{justifyContent: 'center'}}>
+                                <Row gutter={24} style={{ justifyContent: 'center' }}>
                                     <Col spam={24} >
-                                        <Select defaultValue="Cliente" style={{ width: 200 }} labelInValue="Entrar como um:" onChange={handleChange}>
-                                            <Option value="cliente" >Cliente</Option>
-                                            <Option value="cuidador" >Cuidador</Option>
-                                        </Select>
+                                        <Form.Item
+                                            name="tipo"
+                                            label="Sou um:"
+                                            placeholder="Selecione o usuário"
+                                        >
+                                            <Select defaultActiveFirstOption style={{ width: 200 }}  labelInValue onChange={e => handleChange(e)}>
+                                                <Option value="dono" >Cliente</Option>
+                                                <Option value="cuidador" >Cuidador</Option>
+                                            </Select>
+                                        </Form.Item>
                                     </Col>
                                     <Col span={24}>
                                         <Form.Item
