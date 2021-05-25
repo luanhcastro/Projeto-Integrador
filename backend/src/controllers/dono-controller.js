@@ -20,9 +20,9 @@ module.exports = {
       telefone,
     } = req.body
 
-    const verificacaoCpf = await Dono.findOne({ where: { cpf: cpf } })
-    const verificacaoEmail = await Dono.findOne({ where: { email: email } })
-    const verificacaoTelefone = await Dono.findOne({ where: { telefone: telefone } })
+    const verificacaoCpf = await Dono.findOne({ where: { cpf: { [Op.eq]: cpf } } })
+    const verificacaoEmail = await Dono.findOne({ where: { email: { [Op.eq]: email } } })
+    const verificacaoTelefone = await Dono.findOne({ where: { telefone: { [Op.eq]: telefone } } })
 
     if (verificacaoCpf) return res.status(400).send({ error: "Cpf ja existe" })
     if (verificacaoEmail) return res.status(400).send({ error: "Email ja existe" })
@@ -160,7 +160,7 @@ module.exports = {
 
     const dono = await Dono.findOne({
       where: {
-        email: email
+        email: { [Op.eq]: email } // email == email
       }
     })
 
