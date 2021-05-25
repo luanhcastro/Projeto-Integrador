@@ -20,11 +20,11 @@ const User = () => {
   const [tableData, setTableData] = useState([]);
 
   const getUrl = `http://localhost:3001/dono/${userId}`
+  const getUrlString = getUrl.toString()
   const deleteUrl = 'http://localhost:3001/pet'
   const request = () => {
-    axios.get(getUrl)
+    axios.get(getUrlString)
       .then(response => {
-        console.log(response.data.pet)
 
         setTableData(response.data.pet.map((pet, index) => ({
           key: pet.id,
@@ -47,13 +47,15 @@ const User = () => {
       })
   }
 
-  const deletePet = id => {
-     axios.delete(deleteUrl,
+  const deletePet = async record => {
+    console.log(record.key);
+    await axios.delete(deleteUrl,
       {
-        idPet: id,
+        idPet: record.key,
       })
       .then(response => {
         console.log('deletado', response);
+        localStorage.removeItem(record.key)
       })
       .catch((err) => {
         notification['error']({
@@ -105,7 +107,7 @@ const User = () => {
       render: (text, record) => (
         <Space size="middle">
           <Button type="ghost" onClick={() => redirectEdit(record.key)}>Editar</Button>
-          <Button type="danger" onClick={() => deletePet(record.key)}>Deletar</Button>
+          <Button type="danger" onClick={() => deletePet(record)}>Deletar</Button>
         </Space>
       ),
     },

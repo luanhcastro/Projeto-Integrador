@@ -26,10 +26,10 @@ const Pet = () => {
                 console.log(response)
                 form.setFieldsValue({
                     nome: response.data.nomePet,
-                    dataNasc: response.data.idade,
+                    idade: response.data.idade,
                     raca: response.data.raca,
                     porte: response.data.porte,
-                    });
+                });
             })
             .catch((err) => {
                 notification['error']({
@@ -51,9 +51,9 @@ const Pet = () => {
             await axios.post(url,
                 {
                     nomePet: values.nome,
-                    idade: values.dataNasc,
+                    idade: values.idade,
                     raca: values.raca,
-                    porte: values.porte.value,
+                    porte: values.porte,
                     idDono: localStorage.getItem('id')
                 })
                 .then(() => window.location = '/pet#/homeUsuario')
@@ -70,9 +70,9 @@ const Pet = () => {
                 {
                     idPet: editingId,
                     nomePet: values.nome,
-                    idade: values.dataNasc,
+                    idade: values.idade,
                     raca: values.raca,
-                    porte: values.porte.value,
+                    porte: values.porte,
                     idDono: localStorage.getItem('id')
                 })
                 .then(() => localStorage.removeItem('currentPetId'))
@@ -144,8 +144,8 @@ const Pet = () => {
                                                 placeholder="Nome do pet" />
                                         </Form.Item>
                                         <Form.Item
-                                            name="dataNasc"
-                                            label="Data de Nascimento"
+                                            name="idade"
+                                            label="Idade"
                                             rules={[
                                                 {
                                                     required: true,
@@ -155,7 +155,7 @@ const Pet = () => {
                                         >
                                             <Input
                                                 maxLength={10}
-                                                placeholder="Data de Nascimento do pet" />
+                                                placeholder="Idade do pet" />
                                         </Form.Item>
                                     </Col>
                                     <Col span={12}>

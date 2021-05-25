@@ -15,6 +15,7 @@ const Login = props => {
     const [form] = Form.useForm();
     const url = `http://localhost:3001/${tipo}`
     const urlString = url.toString()
+    // console.log("URL: " + urlString)
     const onFinish = async (values) => {
         await axios.post(urlString,
             {
@@ -22,9 +23,10 @@ const Login = props => {
                 senha: values.senha,
             })
             .then(response => {
-                console.log(response.data);
+                console.log(response.data.cuidador);
+                if (response.data.cuidador) localStorage.setItem("id", JSON.stringify(response.data.cuidador.id));
+                else localStorage.setItem("id", JSON.stringify(response.data.dono.id));
                 localStorage.setItem("token", JSON.stringify(response.data.token));
-                localStorage.setItem("id", JSON.stringify(response.data.dono.id));
                 window.location = tipo === 'cuidador/loginCuidador' ? '/pet#/homeCuidador' : '/pet#/homeUsuario';
             })
             .catch((err) => {

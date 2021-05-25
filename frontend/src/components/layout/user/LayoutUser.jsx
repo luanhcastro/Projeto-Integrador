@@ -12,8 +12,9 @@ const { Content, Footer } = Layout;
 const User = () => {
   const [form] = Form.useForm();
   const url = 'http://localhost:3001/dono'
+  const urlString = url.toString()
   const onFinish = async (values) => {
-    await axios.post(url,
+    await axios.post(urlString,
       {
         nome: values.nome,
         dataNascimento: values.dataNasc,
@@ -31,6 +32,7 @@ const User = () => {
             'Parabéns, agora é só logar na nossa plataforma com seu email e senha!',
         });
         form.resetFields();
+        window.location.href = "http://localhost:3000/#/login";
       })
       .catch((err) => {
         notification['error']({
@@ -197,11 +199,11 @@ const User = () => {
                     >
                       Limpar campos
                   </Button>
-                    <Link to="/login">
+                    {/* <Link to="/login"> */}
                       <Button type="primary" htmlType="submit">
                         Enviar
                       </Button>
-                    </Link>
+                    {/* </Link> */}
                   </Col>
                 </Row>
               </Form>
