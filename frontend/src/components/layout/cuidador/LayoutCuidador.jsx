@@ -35,6 +35,7 @@ const Cuidador = () => {
         console.log('122232312');
         form.resetFields();
         console.log(response);
+        window.location.href = "http://localhost:3000/#/login";
       })
       .catch((err) => {
         notification['error']({
@@ -185,11 +186,9 @@ const Cuidador = () => {
                     >
                       Limpar campos
                   </Button>
-                    <Link to='/login' > 
-                      <Button type="primary" htmlType="submit">
-                        Enviar
-                  </Button>
-                    </Link>
+                    {/* <Link to='/login' >  */}
+                      <Button type="primary" htmlType="submit">Enviar</Button>
+                    {/* </Link> */}
                </Col>
             </Row>
          </Form>

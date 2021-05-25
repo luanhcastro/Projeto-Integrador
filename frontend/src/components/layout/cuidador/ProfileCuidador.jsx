@@ -18,10 +18,11 @@ const AdvancedSearchForm = () => {
    const [form] = Form.useForm();
    const [showAlert, setShowAlert] = useState(false);
    const [showErrorAlert, setShowErrorAlert] = useState(false);
-   const url = 'http://localhost:3001/profilecuidador'
+   const url = 'http://localhost:3001/cuidador'
+   const urlString = url.toString()
    const onFinish = (values) => {
       console.log('Received values of form: ', values);
-      axios.post(url,
+      axios.post(urlString,
          {
             nome: values.nome,
             dataNascimento: values.dataNasc,
