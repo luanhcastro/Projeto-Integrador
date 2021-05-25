@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import "../Home.css"
 import { Layout, Card, Typography, Form, Input, Button, Row, Col, Select, notification } from 'antd';
 import 'antd/dist/antd.css';
@@ -16,20 +16,20 @@ const { Content, Footer, Header } = Layout;
 const { Option } = Select;
 
 const Pet = () => {
+    const [loading, setLoading] = useState(false);
+    const [editingId, setEditingId] = useState(false);
     const [form] = Form.useForm();
-    const url = 'http://localhost:3001/pet'
-    const onFinish = async (values) => {
-        await axios.post(url,
-            {
-                nomePet: values.nome,
-                idade: values.dataNasc,
-                raca: values.raca,
-                porte: values.porte.value,
-                idDono: localStorage.getItem('id')
-            })
+
+    const request = () => {
+        axios.get(`http://localhost:3001/pet/${editingId}`)
             .then((response) => {
                 console.log(response)
-                form.resetFields();
+                form.setFieldsValue({
+                    nome: response.data.nomePet,
+                    dataNasc: response.data.idade,
+                    raca: response.data.raca,
+                    porte: response.data.porte,
+                    });
             })
             .catch((err) => {
                 notification['error']({
@@ -39,7 +39,64 @@ const Pet = () => {
                 });
                 console.log(err);
             })
+            .finally(() => setLoading(false))
+
+
+    }
+
+
+    const url = 'http://localhost:3001/pet'
+    const onFinish = async (values) => {
+        if (!editingId) {
+            await axios.post(url,
+                {
+                    nomePet: values.nome,
+                    idade: values.dataNasc,
+                    raca: values.raca,
+                    porte: values.porte.value,
+                    idDono: localStorage.getItem('id')
+                })
+                .then(() => window.location = '/pet#/homeUsuario')
+                .catch((err) => {
+                    notification['error']({
+                        message: 'Não foi possivel cadastrar',
+                        description:
+                            'Verifique se seus dados estão corretos.',
+                    });
+                    console.log(err);
+                })
+        } else {
+            await axios.patch(url,
+                {
+                    idPet: editingId,
+                    nomePet: values.nome,
+                    idade: values.dataNasc,
+                    raca: values.raca,
+                    porte: values.porte.value,
+                    idDono: localStorage.getItem('id')
+                })
+                .then(() => localStorage.removeItem('currentPetId'))
+                .then(() => window.location = '/pet#/homeUsuario')
+                .catch((err) => {
+                    notification['error']({
+                        message: 'Não foi possivel cadastrar',
+                        description:
+                            'Verifique se seus dados estão corretos.',
+                    });
+                    console.log(err);
+                })
+        }
+
     };
+    useEffect(() => {
+        setEditingId(localStorage.getItem('currentPetId'))
+    }, []);
+    useEffect(() => {
+        if (editingId) {
+            setLoading(true);
+            request(editingId);
+        }
+    }, [editingId]);
     return (
         <div>
             <Header class="defaultHeader">
@@ -57,12 +114,13 @@ const Pet = () => {
             <Card style={{ width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.105)' }}>
                 <Content className="site-layout" style={{ padding: '0 200px', minHeight: '800px', marginTop: 110 }}>
                     <div className="site-layout-background" style={{ padding: 10, minHeight: 380 }}>
-                        <Card style={{ textAlign: 'center', minHeight: '800px' }} title={<Title type="warning">CADASTRO DE PETS</Title>}>
+                        <Card style={{ textAlign: 'center', minHeight: '800px' }} loading={loading} title={<Title type="warning">CADASTRO DE PETS</Title>}>
                             <Form
                                 style={{ marginTop: 50 }}
                                 form={form}
                                 name="advanced_search"
                                 layout="vertical"
+                                loading={loading}
                                 className="ant-advanced-search-form"
                                 onFinish={onFinish}
                                 size="large"
@@ -70,6 +128,7 @@ const Pet = () => {
                                 <Row gutter={24}>
                                     <Col span={12}>
                                         <Form.Item
+                                            loading={loading}
                                             name="nome"
                                             label="Nome"
                                             rules={[
@@ -80,6 +139,8 @@ const Pet = () => {
                                             ]}
                                         >
                                             <Input
+                                                loading={loading}
+
                                                 placeholder="Nome do pet" />
                                         </Form.Item>
                                         <Form.Item
@@ -123,7 +184,7 @@ const Pet = () => {
                                                 },
                                             ]}
                                         >
-                                            <Select defaultValue="medio" style={{ minwidth: 200 }} labelInValue>
+                                            <Select defaultValue="medio" style={{ minwidth: 200 }}>
                                                 <Option value="pequeno">Pequeno</Option>
                                                 <Option value="medio">Médio</Option>
                                                 <Option value="grande">Grande</Option>
@@ -132,7 +193,7 @@ const Pet = () => {
                                     </Col>
 
                                 </Row>
-                                <Row style={{ marginTop: '200px' }}>
+                                <Row style={{ marginTop: '320px' }}>
                                     <Col span={24} style={{ textAlign: 'right' }}>
                                         <Button
                                             style={{ margin: '0 8px' }}
