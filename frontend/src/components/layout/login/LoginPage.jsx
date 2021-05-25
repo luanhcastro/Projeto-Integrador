@@ -11,11 +11,12 @@ const { Option } = Select;
 const Login = props => {
 
     const [tipo, setTipo] = useState('dono/loginDono');
-    console.log(tipo.key);
+    console.log(tipo);
     const [form] = Form.useForm();
     const url = `http://localhost:3001/${tipo}`
+    const urlString = url.toString()
     const onFinish = async (values) => {
-        await axios.post(url,
+        await axios.post(urlString,
             {
                 email: values.email,
                 senha: values.senha,
@@ -36,8 +37,8 @@ const Login = props => {
             })
     };
     function handleChange(value) {
-        console.log(value);
-        value.key === 'dono' ? setTipo(`dono/loginDono`) : setTipo(`cuidador/loginCuidador`)
+        console.log("VALUE:" + value);
+        value === 'dono' ? setTipo(`dono/loginDono`) : setTipo(`cuidador/loginCuidador`)
     };
     return (
         <div>
