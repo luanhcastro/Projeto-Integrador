@@ -28,17 +28,29 @@ module.exports = {
       idDono,
       idPet,
     } = req.body
+    
+    // Verifica se ja existe um servico com o Id de Cuidador, Dono e Pet 
+    const dataServico = await Servico.findOne({
+      where: {
+        idDono: { [Op.eq]: idDono },
+        idCuidador: { [Op.eq]: idCuidador },
+        idPet: { [Op.eq]: idPet },
+      }
+    })  
 
+    if (dataServico) return res.status(400).json({ error: 'Serviço está em andamento' })
+
+    // Validacoes se existe Cuidador, Pet e Dono
     const cuidador = await Cuidador.findByPk(idCuidador)
     const dono = await Dono.findByPk(idDono)
     const pet = await Pet.findByPk(idPet)
-    var dataAtual = dataFormatada() // formata a data atual (yyyy-mm-dd)
 
     if (!cuidador) return res.status(400).json({ error: 'Cuidador nao existe' })
     if (!dono) return res.status(400).json({ error: 'Dono nao existe' })
     if (!pet) return res.status(400).json({ error: 'Pet nao existe' })
-
-    const petsDono = await Pet.findOne({  // Verifica se o pet pertence ao dono
+    
+    // Verifica se o pet pertence ao dono
+    const petsDono = await Pet.findOne({  
       where: {
         id: { [Op.eq]: idPet },           // id == id
         idDono: { [Op.eq]: idDono }       // idDono == idDono
@@ -46,9 +58,15 @@ module.exports = {
     })
     
     if (!petsDono) return res.status(400).send({ error: "Este Pet não pertence a este Dono" })
+    
+    // Verifica se a data informada e valida
+    var dataAtual = dataFormatada() // formata a data atual (yyyy-mm-dd)
+    const dataIni = req.body.dataInicio
+    const dataFim = req.body.dataFinal
 
-    if (req.body.dataInicio < dataAtual) return res.status(400).send({ error: "Data de inicio invalida" })
-    if (req.body.dataFinal < req.body.dataInicio) return res.status(400).send({ error: "Data de fim invalida" })
+    if (dataIni < dataAtual) return res.status(400).send({ error: "Data de inicio invalida" })
+    if (dataFim < dataIni) return res.status(400).send({ error: "Data de fim invalida" })
+
 
     const numeroServicos = await Cuidador.findByPk(req.body.idCuidador)
 
