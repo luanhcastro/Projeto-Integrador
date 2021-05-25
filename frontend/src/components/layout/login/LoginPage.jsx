@@ -10,7 +10,7 @@ const { Content, Footer } = Layout;
 const { Option } = Select;
 const Login = props => {
 
-    const [tipo, setTipo] = useState('cliente');
+    const [tipo, setTipo] = useState('dono/loginDono');
     console.log(tipo.key);
     const [form] = Form.useForm();
     const url = `http://localhost:3001/${tipo}`
@@ -24,7 +24,7 @@ const Login = props => {
                 console.log(response.data);
                 localStorage.setItem("token", JSON.stringify(response.data.token));
                 localStorage.setItem("id", JSON.stringify(response.data.dono.id));
-                window.location = tipo === 'cuidador' ? '/pet#/homeCuidador' : '/pet#/homeUsuario';
+                window.location = tipo === 'cuidador/loginCuidador' ? '/pet#/homeCuidador' : '/pet#/homeUsuario';
             })
             .catch((err) => {
                 notification['error']({
@@ -37,7 +37,7 @@ const Login = props => {
     };
     function handleChange(value) {
         console.log(value);
-        value.key === 'dono' ? setTipo(`${value.key}/loginDono`) : setTipo(`${value.key}/loginCuidador`)
+        value.key === 'dono' ? setTipo(`dono/loginDono`) : setTipo(`cuidador/loginCuidador`)
     };
     return (
         <div>
