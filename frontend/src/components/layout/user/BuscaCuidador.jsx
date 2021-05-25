@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "../Home.css"
-import { Layout, Card, Typography, Form, Input, notification, Button, Row, Col, Alert } from 'antd';
+import { Layout, Card, Typography, Form, Input, notification, Button, Row, Col, Alert, Space, Table } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import axios from 'axios';
@@ -18,7 +18,84 @@ const AdvancedSearchForm = () => {
    const [form] = Form.useForm();
    const [showAlert, setShowAlert] = useState(false);
    const [showErrorAlert, setShowErrorAlert] = useState(false);
+
+   const [loading, setLoading] = useState(false);
+   const [tableData, setTableData] = useState([]);
+
+   const getUrl = `http://localhost:3001/cuidador`
+   const request = () => {
+      axios.get(getUrl)
+         .then(response => {
+            console.log(response.data.pet)
+
+            setTableData(response.data.pet.map((cuidador, index) => ({
+               nome: cuidador.data.nome,
+               dataNasc: cuidador.data.idade,
+               cpf: cuidador.data.cpf,
+               endereco: cuidador.data.endereco,
+               numServicos: cuidador.data.numServicos,
+               telefone: cuidador.data.telefone
+            }))
+            )
+         })
+         .then(() => {
+            setLoading(false);
+         })
+         .catch((err) => {
+            notification['error']({
+               message: 'Não foi possivel realizar o login',
+               description:
+                  'Verifique se seus dados estão corretos.',
+            });
+            console.log(err);
+         })
+   }
+   const redirectServico = id => {
+      localStorage.setItem('currentCuidadorId', id);
+      window.location = '/pet#/homeUsuario/buscaCuidador';
+   }
+
+   useEffect(() => {
+      setLoading(true);
+      request();
+   }, []);
+
+   useEffect(() => {
+
+      console.log(222, tableData)
+   }, [tableData]);
+
+   const columns = [
+      {
+         title: 'Nome',
+         dataIndex: 'nome',
+         key: 'nome',
+         render: text => <a>{text}</a>,
+      },
+      {
+         title: 'Número de serviços',
+         dataIndex: 'numServicos',
+         key: 'numServicos',
+      },
+      {
+         title: 'Endereco',
+         key: 'endereco',
+         dataIndex: 'endereco',
+      },
+      {
+         title: 'Action',
+         key: 'action',
+         render: (text, record) => (
+            <Space size="middle">
+               {/* <Button type="ghost" onClick={() => redirectEdit(record.key)}>Editar</Button>
+            <Button type="danger" onClick={() => deletePet(record.key)}>Deletar</Button> */}
+            </Space>
+         ),
+      },
+   ];
+
    const url = 'http://localhost:3001/profileuser'
+
    const onFinish = (values) => {
       console.log('Received values of form: ', values);
       axios.post(url,
@@ -73,8 +150,9 @@ const AdvancedSearchForm = () => {
             <Content className="site-layout" style={{ padding: '0 200px', minHeight: '800px', marginTop: 110 }}>
                <div className="site-layout-background" style={{ padding: 10, minHeight: 380 }}>
                   <Card style={{ textAlign: 'center', minHeight: '800px' }} title={<Title type="warning">BUSCA CUIDADOR</Title>}>
-                     {showAlert && (<Alert message='Cadastro salvo com sucesso!' type='success' showIcon closable />)}
-                     {showErrorAlert && (<Alert message='Não foi possível efetuar o cadastro' type='error' showIcon closable />)}
+                     <Button onClick={redirectServico} >NOVO SERVICO</Button>
+
+                     <Table style={{ marginTop: 30 }} columns={columns} loading={loading} dataSource={tableData} />
 
 
 

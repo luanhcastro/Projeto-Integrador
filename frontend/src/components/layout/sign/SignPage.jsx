@@ -15,16 +15,19 @@ const Login = () => {
         <div>
             <Header />
             <Card style={{ width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.105)' }}>
-                <Content className="site-layout" style={{ display: 'flex', justifyContent: 'center', minHeight: '600px', marginTop: 110 }}>
-                    <div className="site-layout-background" style={{ maxWidth: '600px', padding: 10, minHeight: 380 }}>
-                        <Link to="/cuidador">
-                            <Button type="primary" size="large" style={{ margin: 10 }}
-                                icon={(<HeartOutlined style={{ fontSize: 20 }} />)}>CUIDADOR</Button>
-                        </Link>
-                        <Link to="/usuario">
-                            <Button type="primary" size="large" style={{ margin: 10 }}
-                                icon={(<UserOutlined style={{ fontSize: 20 }} />)}>USUÁRIO</Button>
-                        </Link>
+                <Content className="site-layout" style={{ display: 'flex', justifyContent: 'center', minHeight: '100px', marginTop: 110 }}>
+                    <div className="site-layout-background" style={{ maxWidth: '600px', padding: 10, minHeight: 100 }}>
+                        <Card style={{ textAlign: 'center', minHeight: '100px' }} title={<Title type="warning">CADASTRAR COMO:</Title>}>
+
+                            <Link to="/cuidador">
+                                <Button type="primary" size="large" style={{ margin: 10 }}
+                                    icon={(<HeartOutlined style={{ fontSize: 20 }} />)}>CUIDADOR</Button>
+                            </Link>
+                            <Link to="/usuario">
+                                <Button type="primary" size="large" style={{ margin: 10 }}
+                                    icon={(<UserOutlined style={{ fontSize: 20 }} />)}>USUÁRIO</Button>
+                            </Link>
+                        </Card>
                     </div>
                 </Content>
             </Card>
