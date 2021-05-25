@@ -123,7 +123,6 @@ module.exports = {
       idServico,
       tipo,
       preco,
-      dataInicio,
       dataFinal,
     } = req.body
 
@@ -135,10 +134,13 @@ module.exports = {
 
     if (verificaServico) return res.status(400).send({ error: "Id nao correspondente" })
 
+    var dataAtual = dataFormatada() // formata a data atual (yyyy-mm-dd)
+
+    if (dataFinal < dataAtual) return res.status(400).send({ error: "Data de fim invalida" })
+
     const servico = await Servico.update({
       tipo,
       preco,
-      dataInicio,
       dataFinal,
     }, {
       where: {
