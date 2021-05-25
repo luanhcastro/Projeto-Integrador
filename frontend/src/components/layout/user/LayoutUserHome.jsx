@@ -47,9 +47,8 @@ const User = () => {
       })
   }
 
-  const deletePet = async id => {
-    console.log(111111, id);
-    await axios.delete(deleteUrl,
+  const deletePet = id => {
+     axios.delete(deleteUrl,
       {
         idPet: id,
       })
