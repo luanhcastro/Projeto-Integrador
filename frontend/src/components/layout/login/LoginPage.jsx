@@ -62,7 +62,7 @@ const Login = props => {
                                             label="Sou um:"
                                             placeholder="Selecione o usuário"
                                         >
-                                            <Select defaultActiveFirstOption style={{ width: 200 }}  labelInValue onChange={e => handleChange(e)}>
+                                            <Select defaultValue="dono" style={{ width: 200 }} onChange={e => handleChange(e)}>
                                                 <Option value="dono" >Cliente</Option>
                                                 <Option value="cuidador" >Cuidador</Option>
                                             </Select>
