@@ -38,6 +38,15 @@ module.exports = {
     if (!dono) return res.status(400).json({ error: 'Dono nao existe' })
     if (!pet) return res.status(400).json({ error: 'Pet nao existe' })
 
+    const petsDono = await Pet.findOne({  // Verifica se o pet pertence ao dono
+      where: {
+        id: { [Op.eq]: idPet },           // id == id
+        idDono: { [Op.eq]: idDono }       // idDono == idDono
+      }
+    })
+    
+    if (!petsDono) return res.status(400).send({ error: "Este Pet não pertence a este Dono" })
+
     if (req.body.dataInicio < dataAtual) return res.status(400).send({ error: "Data de inicio invalida" })
     if (req.body.dataFinal < req.body.dataInicio) return res.status(400).send({ error: "Data de fim invalida" })
 
@@ -115,7 +124,7 @@ module.exports = {
       dataFinal,
     }, {
       where: {
-        id: idServico
+        id: { [Op.eq]: idServico }  // id == id
       }
     })
 
@@ -131,7 +140,7 @@ module.exports = {
     const { idServico } = req.body
     const servico = await Servico.destroy({
       where: {
-        id: idServico
+        id: { [Op.eq]: idServico }  // id != id
       }
     })
 
