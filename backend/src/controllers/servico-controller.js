@@ -32,11 +32,21 @@ module.exports = {
     const cuidador = await Cuidador.findByPk(idCuidador)
     const dono = await Dono.findByPk(idDono)
     const pet = await Pet.findByPk(idPet)
+    // const idDonoPet = 
     var dataAtual = dataFormatada() // formata a data atual (yyyy-mm-dd)
 
     if (!cuidador) return res.status(400).json({ error: 'Cuidador nao existe' })
     if (!dono) return res.status(400).json({ error: 'Dono nao existe' })
     if (!pet) return res.status(400).json({ error: 'Pet nao existe' })
+
+    const petsDono = await Pet.findOne({
+      where: {
+        id: { [Op.eq]: idPet },       // id == id
+        idDono: { [Op.eq]: idDono }   // idDono == idDono
+      }
+    })
+    
+    if (!petsDono) return res.status(400).send({ error: "Este Pet não pertence a este Dono" })
 
     if (req.body.dataInicio < dataAtual) return res.status(400).send({ error: "Data de inicio invalida" })
     if (req.body.dataFinal < req.body.dataInicio) return res.status(400).send({ error: "Data de fim invalida" })
